@@ -1,52 +1,76 @@
-<h1 align="center">CelestialDocs</h1>
+# Astro Docs <picture><source media="(prefers-color-scheme: dark)" srcset="https://astro.build/assets/press/astro-icon-light.png"><source media="(prefers-color-scheme: light)" srcset="https://astro.build/assets/press/astro-icon-dark.png"><img align="right" valign="center" height="79" width="63" src="https://astro.build/assets/press/astro-icon-dark.png" alt="Astro logo" /></picture>
 
-<p align="center">
-<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/HYP3R00T/CelestialDocs/deploy.yml?style=for-the-badge&labelColor=363a4f&color=8aadf4">
-</p>
 
-**CelestialDocs** is a simple and versatile documentation template built with Astro. It provides a clean and minimal interface for creating documentation websites, leveraging the power of Astro and Tailwind CSS for a streamlined user experience.
+To all who come to this happy place: welcome.
 
-## Features
+This is the repo for [docs.astro.build](https://docs.astro.build/).
+This repo contains all the source code we use to build our docs site.
 
-- **Astro Build**: Optimized for fast and efficient static site generation.
-- **Tailwind CSS**: Customizable and responsive design with Tailwind CSS.
-- **Shadcn UI**: Integrated components for a modern UI experience.
-- **Customizable**: Easily configure colors, icons, and layout to fit your needs.
-- **Documentation Ready**: Ideal for creating comprehensive and organized documentation.
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/withastro/docs)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/github/withastro/docs)
+[![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://pr.new/github.com/withastro/docs)
 
-## Documentation
+## We are Astro
 
-For detailed documentation on how to use and configure CelestialDocs, visit [celestialdocs.hyperoot.dev](https://celestialdocs.hyperoot.dev).
+Astro is an all-in-one web framework for building fast, content-focused websites.
+We want everyone to be successful building sites, and that means helping everyone understand how Astro works.
 
-## Contributing
+## You are Awesome
 
-Contributions are welcome! If you have suggestions, improvements, or bug fixes, please open an issue or submit a pull request.
+You can also help make the docs awesome.
+Your feedback is welcome.
+Your writing, editing, translating, designing, and developing skills are welcome.
+You being a part of our community is welcome.
 
-1. **Fork the Repository**.
-2. **Create a New Branch**:
+## Chat with Us
 
-   ```bash
-   git checkout -b feature/your-feature
-   ```
+You can learn more about Astro, get support, and meet other devs in [our Discord community](https://astro.build/chat).
 
-3. **Commit Your Changes**:
+## Raise an Issue
 
-   ```bash
-   git commit -am 'Add some feature'
-   ```
+Is something missing?
+Is something confusing?
+Is something wrong?
 
-4. **Push to the Branch**:
+Creating a new Issue puts a problem on our radar!
 
-   ```bash
-   git push origin feature/your-feature
-   ```
+[See if your issue has already been reported](https://github.com/withastro/docs/issues), and if not, [create a new one](https://github.com/withastro/docs/issues/new/choose).
 
-5. **Open a Pull Request**.
+## Share an Idea
 
-## License
+Could something be better?
+Want to share an idea with us?
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Discussions are threads where you can offer feedback on things that might not exactly be problems to be fixed but are ideas to be explored. 
 
----
+[Join the Docs Discussions](https://github.com/withastro/docs/discussions) where we brainstorm, ask questions, share hopes and dreams...
 
-Built by HYP3R00T. The source code is available on [GitHub](https://github.com/yourusername/celestialdocs). Crafted with ❤️ and care.
+## Make a Fix or Contribution
+
+Did you find a typo, a broken link, or another item with an obvious quick fix?
+
+If you can see what the problem is, and you know how to fix it, then you can make a PR (pull request) with the change and contribute to the docs repo yourself.
+
+> Want to make a larger contribution? Please see [CONTRIBUTING.md](https://github.com/withastro/docs/blob/main/CONTRIBUTING.md) first! 
+
+## Translate a Page
+
+Speak another language natively? 
+
+Join our i18n gang on Discord or jump into the PRs to help with reviewing existing draft translations!
+
+Check out the dedicated [i18n guide](https://contribute.docs.astro.build/guides/i18n/) for more details.
+
+### Translation progress
+
+<a href="https://i18n.docs.astro.build/">
+  <img alt="Details of each language’s progress translating the Astro Docs" width="600" src="https://i18n.docs.astro.build/summary.svg" />
+</a>
+
+## Next Steps
+
+- [Read the docs](https://docs.astro.build/)
+- [Raise an issue](https://github.com/withastro/docs/issues/new)
+- [Participate in a discussion](https://github.com/withastro/docs/discussions)
+- [Join the #docs channel on Discord](https://discord.gg/cZDZU3hJHc)
+

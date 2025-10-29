@@ -1,13 +1,8 @@
 ---
-import { Image } from "astro:assets";
-
-import BaseLayout from "@/layouts/BaseLayout.astro";
-
-import error404 from "@/assets/404 Error.svg";
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import NotFound from '~/components/NotFound.astro';
 ---
 
-<BaseLayout>
-  <div class="flex justify-center align-middle">
-    <Image src={error404} alt="A description of my image." class="h-[50dvh]" />
-  </div>
-</BaseLayout>
+<StarlightPage frontmatter={{ title: '404', template: 'splash' }}>
+	<NotFound lang="en" />
+</StarlightPage>
