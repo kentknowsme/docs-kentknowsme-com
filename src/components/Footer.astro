@@ -1,0 +1,270 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  docs: [
+    { href: '/docs/getting-started', label: 'Getting Started' },
+    { href: '/docs/guides', label: 'Guides' },
+    { href: '/docs/reference', label: 'Reference' },
+    { href: '/docs/examples', label: 'Examples' }
+  ],
+  resources: [
+    { href: '/portfolio', label: 'Portfolio' },
+    { href: '/about', label: 'About' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: 'Contact' }
+  ],
+  social: [
+    { href: 'https://github.com', label: 'GitHub', icon: 'github' },
+    { href: 'https://linkedin.com', label: 'LinkedIn', icon: 'linkedin' },
+    { href: 'mailto:kentknows@me.com', label: 'Email', icon: 'email' }
+  ]
+};
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section footer-brand">
+        <div class="footer-logo">
+          <span class="logo-text">Kent<span class="logo-accent">Knows</span>Me</span>
+        </div>
+        <p class="footer-tagline">
+          Web Developer | Technical Writer<br />
+          Building documentation and applications that matter
+        </p>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-heading">Documentation</h3>
+        <ul class="footer-links">
+          {footerLinks.docs.map(link => (
+            <li>
+              <a href={link.href} class="footer-link">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-heading">Resources</h3>
+        <ul class="footer-links">
+          {footerLinks.resources.map(link => (
+            <li>
+              <a href={link.href} class="footer-link">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-heading">Connect</h3>
+        <ul class="footer-links footer-social">
+          {footerLinks.social.map(link => (
+            <li>
+              <a 
+                href={link.href} 
+                class="footer-link footer-social-link"
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <p class="copyright">
+          © {currentYear} Kent Schaeffer. All rights reserved.
+        </p>
+        <div class="footer-meta-links">
+          <a href="/privacy" class="footer-meta-link">Privacy Policy</a>
+          <span class="separator" aria-hidden="true">·</span>
+          <a href="/terms" class="footer-meta-link">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-primary-dark);
+    color: var(--color-surface);
+    padding: var(--space-3xl) 0 var(--space-xl);
+    margin-top: var(--space-3xl);
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+  }
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-brand {
+    max-width: 300px;
+  }
+  
+  .footer-logo {
+    margin-bottom: var(--space-md);
+  }
+  
+  .logo-text {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-surface);
+  }
+  
+  .logo-accent {
+    color: var(--color-secondary-light);
+  }
+  
+  .footer-tagline {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-light);
+    margin: 0;
+  }
+  
+  .footer-heading {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-surface);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .footer-links li {
+    margin: 0;
+  }
+  
+  .footer-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+    display: inline-block;
+  }
+  
+  .footer-link:hover,
+  .footer-link:focus {
+    color: var(--color-secondary-light);
+    text-decoration: none;
+  }
+  
+  .footer-social {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-md);
+  }
+  
+  .footer-social-link {
+    font-weight: 500;
+  }
+  
+  .footer-bottom {
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-legal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+  
+  .copyright {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin: 0;
+  }
+  
+  .footer-meta-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  .footer-meta-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+  }
+  
+  .footer-meta-link:hover,
+  .footer-meta-link:focus {
+    color: var(--color-secondary-light);
+    text-decoration: underline;
+  }
+  
+  .separator {
+    color: var(--color-text-muted);
+    user-select: none;
+  }
+  
+  @media (max-width: 1024px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .footer-brand {
+      grid-column: 1 / -1;
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .site-footer {
+      padding: var(--space-2xl) 0 var(--space-lg);
+    }
+    
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+    
+    .footer-brand {
+      grid-column: auto;
+    }
+    
+    .footer-social {
+      flex-direction: column;
+    }
+    
+    .footer-legal {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .footer-meta-links {
+      width: 100%;
+    }
+  }
+</style>

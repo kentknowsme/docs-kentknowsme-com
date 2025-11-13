@@ -4,11 +4,15 @@ import starlight from '@astrojs/starlight';
 
 import cloudflare from '@astrojs/cloudflare';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
       starlight({
-          title: 'My Docs',
+          title: 'Kent Knows Me Docs',
+          customCss: '/styles/global.css',
+          description: 'Documentation for Kent Knows Me',
           social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
           sidebar: [
               {
@@ -24,7 +28,11 @@ export default defineConfig({
               },
           ],
       }),
-	],
+    ],
 
   adapter: cloudflare(),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
