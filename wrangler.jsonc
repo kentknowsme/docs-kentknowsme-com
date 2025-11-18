@@ -1,16 +1,12 @@
 {
-	"main": "dist/_worker.js/index.js",
-	"name": "docs-kentknowsme-com",
-  "compatibility_date": "2025-10-29",
-  "compatibility_flags": [
-    "nodejs_compat",
-    "global_fetch_strictly_public"
-  ],
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist"
-	},
-	"observability": {
-    "enabled": true
-  }
+    "name": "docs-kentknowsme-com",
+    "compatibilityDate": "2025-11-13",
+    "compatibilityFlags": ["nodejs_compat"],
+    "assets": {
+        "binding": "ASSETS",
+        "directory": "./dist"
+    },
+    "observability": {
+        "enabled": true
+    }
 }

@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-
+import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
+  adapter: cloudflare(),
   integrations: [
     starlight({
       title: 'Kent Schaeffer Documentation Repository',
@@ -9,10 +10,10 @@ export default defineConfig({
       logo: {
         src: './src/assets/logo.svg',
       },
-      social: {
-        github: 'https://github.com/kentknowsme',
-        linkedin: 'https://linkedin.com/in/kentmschaeffer',
-      },
+      social: [
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/kentknowsme' },
+        { icon: 'linkedin', label: 'linkedin', href: 'https://linkedin.com/in/kentmschaeffer' },
+      ],
       sidebar: [
         {
           label: 'Getting Started',
@@ -59,6 +60,6 @@ export default defineConfig({
     }),
   ],
   output: 'static',
-  site: 'https://kentknowsme.com',
+  site: 'https://docs.kentknowsme.com',
   base: '/',
 });
