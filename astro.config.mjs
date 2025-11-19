@@ -1,18 +1,18 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
-  adapter: cloudflare(),
   integrations: [
     starlight({
-      title: 'Kent Schaeffer Documentation Repository',
+      title: 'Kent Schaeffer Documentation',
       description: 'Technical documentation and guides by Kent Schaeffer',
       logo: {
         src: './src/assets/logo.svg',
       },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/kentknowsme' },
-        { icon: 'linkedin', label: 'linkedin', href: 'https://linkedin.com/in/kentmschaeffer' },
+        { icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/kentknowsme' },
+        { icon: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/kentmschaeffer' },
       ],
       sidebar: [
         {
@@ -36,7 +36,7 @@ export default defineConfig({
         },
       ],
       customCss: [
-        './src/styles/global.scss',
+        './src/styles/global.css',
       ],
       editLink: {
         baseUrl: 'https://github.com/dev-kentknowsme-com/edit/main/',
@@ -60,6 +60,6 @@ export default defineConfig({
     }),
   ],
   output: 'static',
-  site: 'https://docs.kentknowsme.com',
+  site: 'https://kentknowsme.com',
   base: '/',
 });

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Contact | Kent Schaeffer" 
+  description="Contact Kent Schaeffer for technical writing, web development, and consulting services"
+  currentPath="/contact"
+>
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <h1>Get In Touch</h1>
+        <p class="lead">Let's discuss how I can help with your project</p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <h2>Connect With Me</h2>
+            <ul class="contact-links">
+              <li><strong>Portfolio:</strong> <a href="https://kentknowsme.com" target="_blank" rel="noopener noreferrer">kentknowsme.com</a></li>
+              <li><strong>Documentation:</strong> <a href="https://docs.kentknowsme.com" target="_blank" rel="noopener noreferrer">docs.kentknowsme.com</a></li>
+              <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/kentmschaeffer" target="_blank" rel="noopener noreferrer">linkedin.com/in/kentmschaeffer</a></li>
+              <li><strong>GitHub:</strong> <a href="https://github.com/kentknowsme" target="_blank" rel="noopener noreferrer">github.com/kentknowsme</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .lead {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-light);
+  }
+  
+  .contact-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .contact-info h2 {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .contact-links {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contact-links li {
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-lg);
+  }
+</style>

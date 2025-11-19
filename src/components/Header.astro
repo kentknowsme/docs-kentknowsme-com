@@ -1,6 +1,4 @@
 ---
-import '../styles/global.scss';
-
 interface Props {
   currentPath?: string;
 }
@@ -23,7 +21,7 @@ const isActive = (path: string) => currentPath === path;
     <div class="header-content">
       <div class="header-branding">
         <a href="/" class="logo-link">
-          <span class="logo-text">Kent <span class="logo-accent">M.</span> Schaeffer</span>
+          <span class="logo-text">Kent Schaeffer</span>
         </a>
       </div>
       
@@ -62,12 +60,19 @@ const isActive = (path: string) => currentPath === path;
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: var(--color-background);
+    background-color: rgba(15, 25, 35, 0.15);
+    backdrop-filter: blur(5px);
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-sm);
     height: var(--header-height);
     display: flex;
     align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .site-header.scrolled {
+    background-color: rgba(15, 25, 35, 0.65);
+    backdrop-filter: blur(10px);
   }
   
   .header-content {
@@ -91,16 +96,12 @@ const isActive = (path: string) => currentPath === path;
   }
   
   .logo-link:hover {
-    color: var(--color-secondary);
+    color: var(--color-accent);
     text-decoration: none;
   }
   
   .logo-text {
     display: inline-block;
-  }
-  
-  .logo-accent {
-    color: var(--color-secondary);
   }
   
   .mobile-nav-toggle {
@@ -187,9 +188,9 @@ const isActive = (path: string) => currentPath === path;
   
   .nav-link:hover,
   .nav-link:focus {
-    color: var(--color-secondary);
-    background-color: var(--color-background-alt);
-    text-decoration: none;
+    color: var(--color-accent) !important;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
   }
   
   .nav-link:hover::after,
@@ -198,7 +199,7 @@ const isActive = (path: string) => currentPath === path;
   }
   
   .nav-link--active {
-    color: var(--color-secondary);
+    color: var(--color-primary);
     font-weight: 600;
   }
   

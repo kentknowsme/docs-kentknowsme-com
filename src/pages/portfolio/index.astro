@@ -1,7 +1,5 @@
 ---
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import '../../styles/global.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const pageTitle = 'Kent Schaeffer | Portfolio';
 const pageDescription = 'Technical writing, web development, and consulting portfolio showcasing over 20 years of professional experience.';
@@ -117,18 +115,7 @@ const projects = [
 ];
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={pageDescription} />
-  <title>{pageTitle}</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-</head>
-<body>
-  <Header currentPath="/portfolio" />
-  
+<BaseLayout title={pageTitle} description={pageDescription} currentPath="/portfolio">
   <main>
     <section class="hero-section portfolio-hero">
       <div class="container">
@@ -185,10 +172,7 @@ const projects = [
       </div>
     </section>
   </main>
-  
-  <Footer />
-</body>
-</html>
+</BaseLayout>
 
 <style>
   .portfolio-hero {

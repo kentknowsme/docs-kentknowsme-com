@@ -18,7 +18,7 @@ const footerLinks = {
     { href: 'https://github.com/kentknowsme', label: 'GitHub', icon: 'github' },
     { href: 'https://gitlab.com/kentknowsme', label: 'GitLab', icon: 'gitlab' },
     { href: 'https://linkedin.com/in/kentmschaeffer', label: 'LinkedIn', icon: 'linkedin' },
-    { href: 'mailto:kent@kentknowsme.com', label: 'Email', icon: 'email' }
+    { href: 'mailto:kentknows@me.com', label: 'Email', icon: 'email' }
   ]
 };
 ---
@@ -28,10 +28,10 @@ const footerLinks = {
     <div class="footer-content">
       <div class="footer-section footer-brand">
         <div class="footer-logo">
-          <span class="logo-text">Kent<span class="logo-accent">Knows</span>Me</span>
+          <span class="logo-text">Kent Schaeffer</span>
         </div>
         <p class="footer-tagline">
-          Web Developer | Technical Writer<br />
+          Technical Writer | Web Developer | Consultant<br />
           Building documentation and applications that matter
         </p>
       </div>
@@ -98,7 +98,7 @@ const footerLinks = {
 
 <style>
   .site-footer {
-    background-color: var(--color-primary-dark);
+    background-color: rgba(0, 0, 0, 0.7);
     color: var(--color-surface);
     padding: var(--space-3xl) 0 var(--space-xl);
     margin-top: var(--space-3xl);
@@ -128,10 +128,6 @@ const footerLinks = {
     font-size: var(--font-size-xl);
     font-weight: 700;
     color: var(--color-surface);
-  }
-  
-  .logo-accent {
-    color: var(--color-secondary-light);
   }
   
   .footer-tagline {
@@ -173,7 +169,7 @@ const footerLinks = {
   
   .footer-link:hover,
   .footer-link:focus {
-    color: var(--color-secondary-light);
+    color: var(--color-accent);
     text-decoration: none;
   }
   
@@ -221,7 +217,7 @@ const footerLinks = {
   
   .footer-meta-link:hover,
   .footer-meta-link:focus {
-    color: var(--color-secondary-light);
+    color: var(--color-accent);
     text-decoration: underline;
   }
   
