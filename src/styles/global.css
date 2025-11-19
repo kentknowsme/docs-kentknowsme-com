@@ -1,36 +1,35 @@
 /* ==========================================================================
    Global Styles - KentKnowsMe.com
-   ========================================================================== 
-*/
+   ========================================================================== */
 
 :root {
-  /* Primary Color Palette */
-  --color-primary: #2c3e50;
-  --color-primary-dark: #1a252f;
-  --color-primary-light: #34495e;
+  /* Primary Color Palette - Portfolio Style */
+  --color-primary: #D4A574;
+  --color-primary-dark: #B08A5E;
+  --color-primary-light: #E5C8A0;
   
   /* Secondary Color Palette */
-  --color-secondary: #3498db;
-  --color-secondary-dark: #2980b9;
-  --color-secondary-light: #5dade2;
+  --color-secondary: #7A9B76;
+  --color-secondary-dark: #5F7A5C;
+  --color-secondary-light: #95B891;
   
   /* Accent Colors */
-  --color-accent: #e74c3c;
-  --color-accent-dark: #c0392b;
-  --color-success: #27ae60;
-  --color-warning: #f39c12;
+  --color-accent: #C67B5C;
+  --color-accent-dark: #A65E44;
+  --color-success: #7A9B76;
+  --color-warning: #D4A574;
   
   /* Neutral Colors */
-  --color-background: #ffffff;
-  --color-background-alt: #f8f9fa;
+  --color-background: #0f1923;
+  --color-background-alt: #1a2530;
   --color-surface: #ecf0f1;
-  --color-border: #bdc3c7;
-  --color-text: #2c3e50;
-  --color-text-light: #7f8c8d;
-  --color-text-muted: #95a5a6;
+  --color-border: rgba(212, 165, 116, 0.3);
+  --color-text: #ffffff;
+  --color-text-light: rgba(255, 255, 255, 0.85);
+  --color-text-muted: rgba(255, 255, 255, 0.6);
   
   /* Typography */
-  --font-primary: -apple-system, 'Merriweather', serif;
+  --font-primary: 'Merriweather', serif;
   --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
   --font-heading: var(--font-primary);
   

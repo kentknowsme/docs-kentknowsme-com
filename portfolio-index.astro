@@ -1,0 +1,412 @@
+---
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+
+const pageTitle = 'Kent Schaeffer | Portfolio';
+const pageDescription = 'Technical writing, web development, and consulting portfolio showcasing over 20 years of professional experience.';
+
+const portfolioItems = [
+  {
+    id: 1,
+    title: 'DDI Consulting',
+    description: 'DNS, DHCP, IPAM expertise with Infoblox, BIND, and QIP',
+    details: 'Over 20 years of experience in DDI infrastructure including DNS BIND configuration, Infoblox DDI platforms, QIP environments, DNSSEC implementation, and enterprise-scale IPAM management.',
+    category: 'Infrastructure'
+  },
+  {
+    id: 2,
+    title: 'Basic Websites',
+    description: 'Responsive, modern websites with HTML5, CSS3, JavaScript',
+    details: 'Professional website development using modern web technologies including Vue.js, Bootstrap, and responsive design principles. Focus on accessibility, performance, and user experience.',
+    category: 'Development'
+  },
+  {
+    id: 3,
+    title: 'Technical Documentation',
+    description: 'Comprehensive technical docs and user guides',
+    details: 'Expert technical writing for system administrators, developers, and end users. View examples at docs.kentknowsme.com',
+    category: 'Documentation'
+  },
+  {
+    id: 4,
+    title: 'Website Hosting',
+    description: 'GitHub Pages, Cloudflare, CI/CD pipelines',
+    details: 'Experience with modern deployment workflows including GitHub Actions, Cloudflare Workers, and automated testing pipelines.',
+    category: 'DevOps'
+  },
+  {
+    id: 5,
+    title: 'Network Diagrams',
+    description: 'DNS topology, DHCP scopes, network architecture',
+    details: 'Professional network documentation including DNS zone hierarchies, DHCP scope designs, IPAM planning, and infrastructure diagrams using Visio and OmniGraffle.',
+    category: 'Documentation'
+  },
+  {
+    id: 6,
+    title: 'Linux Scripting',
+    description: 'Bash, shell, korn, zsh, and Perl automation',
+    details: 'Extensive experience automating system administration tasks, DNS updates, log parsing, and infrastructure management across RHEL, CentOS, and Unix environments.',
+    category: 'Automation'
+  },
+  {
+    id: 7,
+    title: 'Linux/Unix Admin',
+    description: 'System configuration, DNS BIND, monitoring',
+    details: 'Over 20 years managing Linux/Unix infrastructure including DNS BIND configuration, zone file management, Infoblox DDI platforms, and system automation.',
+    category: 'Administration'
+  },
+  {
+    id: 8,
+    title: 'Application Development',
+    description: 'JavaScript and Perl backend services',
+    details: 'Full-stack development using Node.js, Perl, RESTful APIs, and database integration for web applications and automation tools.',
+    category: 'Development'
+  }
+];
+
+const projects = [
+  {
+    title: 'IT Service Desk Support',
+    role: 'IT Service Desk Technician I',
+    company: 'Western Governors University',
+    link: 'https://www.wgu.edu',
+    dates: 'Jul 2025 - Sep 2025',
+    description: 'Delivered exceptional customer service and technical support to students. Addressed technical issues efficiently while maintaining high satisfaction levels and collaborated with team members to enhance support processes.'
+  },
+  {
+    title: 'Digital Literacy Education',
+    role: 'Digital Literacy Instructor',
+    company: 'English Skills Learning Center',
+    link: 'https://www.eslcenter.org',
+    dates: 'Jan 2024 - Sep 2024',
+    description: 'Designed and delivered comprehensive Digital Literacy curriculum for adult Emergent Reader learners. Taught over 120 students daily. Planned, installed, configured, and maintained first computer lab with over 30 laptops.'
+  },
+  {
+    title: 'BPM Platform Integration',
+    role: 'Contract Principal Systems Analyst',
+    company: 'Fidelity Investments (via Eliassen Group)',
+    link: 'https://www.fidelity.com',
+    dates: 'Jun 2023 - Sep 2023',
+    description: 'Led the design and implementation of integration guides for business units migrating to a new Camunda-based BPM platform. Streamlined processes and developed comprehensive documentation.'
+  },
+  {
+    title: 'Network Security Automation',
+    role: 'Contract Senior Automation Engineer',
+    company: 'Consolidated Edison (via Randstad)',
+    link: 'https://www.coned.com',
+    dates: 'Dec 2022 - Mar 2023',
+    description: 'Enhanced network device monitoring and management by revamping dashboards and UI services. Automated configuration changes during potential security breaches using PowerShell, HTML, XML, and BMC Network Automation.'
+  },
+  {
+    title: 'Data Automation & Cloud Infrastructure',
+    role: 'Senior Software Engineer',
+    company: 'Five9 Inc',
+    link: 'https://www.five9.com',
+    dates: 'Jan 2022 - Sep 2022',
+    description: 'Engineered custom code that automated data feeds and reporting processes. Configured, deployed, documented, and maintained VM servers in hybrid cloud environment using Google Cloud, CentOS, PostgreSQL, Apache, and MySQL.'
+  },
+  {
+    title: 'Global DDI Team Leadership',
+    role: 'DDI Infrastructure Engineer',
+    company: 'Goldman Sachs',
+    link: 'https://www.goldmansachs.com',
+    dates: 'Jun 2021 - Dec 2021',
+    description: 'Accelerated career growth from Analyst to Vice President by leading the build-out of a global DDI team. Modernized infrastructure processes and spearheaded implementation of best practices for DNS, DHCP, and IPAM.'
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={pageDescription} />
+  <title>{pageTitle}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <Header currentPath="/portfolio" />
+  
+  <main>
+    <section class="hero-section portfolio-hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Portfolio & Projects</h1>
+          <p class="hero-description">
+            A showcase of technical writing, web development, and infrastructure projects 
+            spanning over two decades of professional experience.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="portfolio-section section">
+      <div class="container">
+        <h2 class="section-title">Portfolio & Examples</h2>
+        <div class="portfolio-grid">
+          {portfolioItems.map(item => (
+            <article class="portfolio-card">
+              <div class="portfolio-card-header">
+                <span class="portfolio-category">{item.category}</span>
+              </div>
+              <div class="portfolio-card-body">
+                <h3 class="portfolio-card-title">{item.title}</h3>
+                <p class="portfolio-card-description">{item.description}</p>
+                <p class="portfolio-card-details">{item.details}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section class="projects-section section section--alt">
+      <div class="container">
+        <h2 class="section-title">Recent Project Experience</h2>
+        <div class="timeline">
+          {projects.map((project, index) => (
+            <div class="timeline-item" data-index={index}>
+              <article class="timeline-card">
+                <div class="timeline-card-content">
+                  <h4 class="project-title">{project.title}</h4>
+                  <p class="project-role"><strong>{project.role}</strong></p>
+                  <p class="project-company">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer">{project.company}</a>
+                  </p>
+                  <p class="project-dates">{project.dates}</p>
+                  <p class="project-description">{project.description}</p>
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</body>
+</html>
+
+<style>
+  .portfolio-hero {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-alt) 100%);
+    padding: var(--space-3xl) 0;
+  }
+  
+  .portfolio-hero .hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .portfolio-hero .hero-title {
+    font-size: var(--font-size-4xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .portfolio-hero .hero-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    line-height: var(--line-height-relaxed);
+  }
+  
+  .portfolio-section {
+    padding: var(--space-3xl) 0;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-3xl);
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+  
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-xl);
+  }
+  
+  .portfolio-card {
+    background: rgba(15, 25, 35, 0.7);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    transition: all var(--transition-base);
+    overflow: hidden;
+  }
+  
+  .portfolio-card:hover {
+    background: rgba(212, 165, 116, 0.15);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .portfolio-card-header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    padding: var(--space-sm) var(--space-lg);
+  }
+  
+  .portfolio-category {
+    color: var(--color-background);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .portfolio-card-body {
+    padding: var(--space-xl);
+  }
+  
+  .portfolio-card-title {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+  
+  .portfolio-card-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+    font-weight: 600;
+  }
+  
+  .portfolio-card-details {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    line-height: var(--line-height-relaxed);
+  }
+  
+  .projects-section {
+    padding: var(--space-3xl) 0;
+  }
+  
+  .timeline {
+    position: relative;
+    padding: var(--space-2xl) 0;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--color-primary);
+    transform: translateX(-50%);
+  }
+  
+  .timeline-item {
+    margin-bottom: var(--space-2xl);
+    position: relative;
+  }
+  
+  .timeline-card {
+    background: rgba(15, 25, 35, 0.7);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    width: 45%;
+    position: relative;
+    transition: all var(--transition-base);
+  }
+  
+  .timeline-card:hover {
+    background: rgba(212, 165, 116, 0.15);
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-card {
+    margin-left: auto;
+  }
+  
+  .timeline-card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-primary);
+    top: 20px;
+    border-radius: 50%;
+    border: 4px solid var(--color-background);
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-card::after {
+    left: -60px;
+  }
+  
+  .timeline-item:nth-child(even) .timeline-card::after {
+    right: -60px;
+  }
+  
+  .timeline-card-content {
+    padding: var(--space-xl);
+  }
+  
+  .project-title {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .project-role {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .project-company {
+    margin-bottom: var(--space-sm);
+  }
+  
+  .project-company a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+  
+  .project-company a:hover {
+    color: var(--color-accent);
+  }
+  
+  .project-dates {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+  
+  .project-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-light);
+    line-height: var(--line-height-relaxed);
+  }
+  
+  @media (max-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .timeline::before {
+      left: 0;
+    }
+    
+    .timeline-card {
+      width: 100%;
+      margin-left: var(--space-xl) !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-card::after,
+    .timeline-item:nth-child(even) .timeline-card::after {
+      left: -35px;
+    }
+  }
+</style>

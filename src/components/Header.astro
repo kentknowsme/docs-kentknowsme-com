@@ -1,4 +1,6 @@
 ---
+import '../styles/global.scss';
+
 interface Props {
   currentPath?: string;
 }
@@ -21,7 +23,7 @@ const isActive = (path: string) => currentPath === path;
     <div class="header-content">
       <div class="header-branding">
         <a href="/" class="logo-link">
-          <span class="logo-text">Kent<span class="logo-accent">Knows</span>Me</span>
+          <span class="logo-text">Kent <span class="logo-accent">M.</span> Schaeffer</span>
         </a>
       </div>
       
