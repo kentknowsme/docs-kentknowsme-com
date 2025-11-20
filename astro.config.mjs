@@ -7,8 +7,10 @@ export default defineConfig({
       title: 'Kent Schaeffer Documentation',
       description: 'Technical documentation and guides by Kent Schaeffer',
       logo: {
-        src: './src/assets/logo.svg',
+        light: './src/assets/light-logo.svg',
+        dark: './src/assets/dark-logo.svg',
       },
+      disable404Route: true,
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/kentknowsme' },
         { icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/kentknowsme' },

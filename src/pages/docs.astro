@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="About | Kent Schaeffer" 
+  description="About Kent Schaeffer - Technical Writer, Web Developer, and Consultant"
+  currentPath="/docs"
+>
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <h1>About Kent Schaeffer</h1>
+        <p class="lead">Technical Writer | Web Developer | Consultant</p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <div class="content-wrapper">
+          <p>Over 20 years of experience in technical writing, web development, and IT consulting. Specializing in DDI technologies, Linux/Unix systems administration, and comprehensive technical documentation.</p>
+          
+          <p>Visit my portfolio at <a href="https://kentknowsme.com">kentknowsme.com</a> for examples of my work.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .lead {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-light);
+  }
+  
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>
