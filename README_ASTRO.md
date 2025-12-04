@@ -1,38 +1,53 @@
 # Kent Schaeffer Documentation Site
 
-Technical documentation site built with Astro and Starlight, following Diataxis documentation principles.
-
-## Project Structure
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
 ```
-kentknowsme.com/
-├── docs/                   # Starlight Documentation Site
-│   ├── public/             # Static assets
-│   ├── src/
-│   │   ├── assets/         # Global assets
-│   │   ├── components/     # Reusable Astro components
-│   │   │   ├── Header.astro
-│   │   │   └── Footer.astro
-│   │   ├── content/
-│   │   │   └── docs/       # Documentation markdown files
-│   │   │       ├── getting-started/
-│   │   │       ├── guides/
-│   │   │       │   ├── how-to/
-│   │   │       │   └── tutorials/
-│   │   │       ├── reference/
-│   │   │       └── explanation/
-│   │   ├── layouts/        # Site layouts
-│   │   ├── pages/          # Site pages
-│   │   │   └── index.astro
-│   │   ├── styles/         # Global styles
-│   │   │   └── global.css
-│   │   └── utils/          # Utility functions
-│   ├── astro.config.mjs    # Astro configuration
-│   ├── package.json
-│   └── style-guide.md      # Content style guide
-├── portfolio/              # Separate portfolio site
-└── README.md
+npm create astro@latest -- --template starlight
 ```
+
+
+## 🚀 Project Structure
+
+Inside of your Astro + Starlight project, you'll see the following folders and files:
+
+```
+.
+├── public/
+├── src/
+│   ├── assets/
+│   ├── content/
+│   │   └── docs/
+│   └── content.config.ts
+├── astro.config.mjs
+├── README.md
+├── package.json
+└── tsconfig.json
+```
+
+Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+
+Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+
+Static assets, like favicons, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+
 
 ## Installation
 
@@ -243,7 +258,7 @@ Content and code are proprietary. Refer to individual project licenses.
 Technical issues: Open an issue in the project repository
 Content questions: Refer to `style-guide.md`
 
-## Additional Resources
+## Style Guides Used
 
 - [Astro Documentation](https://docs.astro.build)
 - [Starlight Documentation](https://starlight.astro.build)

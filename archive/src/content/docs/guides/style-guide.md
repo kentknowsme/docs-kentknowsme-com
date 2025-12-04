@@ -1,3 +1,8 @@
+---
+title: Style Guide
+description: A Style Guide for my new Starlight docs site.
+---
+
 # Content Style Guide
 
 This style guide establishes standards for writing, formatting, and presenting technical documentation. It draws from Diataxis quality principles and Mailchimp content standards.
