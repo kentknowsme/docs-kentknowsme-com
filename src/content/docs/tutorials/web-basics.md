@@ -341,7 +341,8 @@ window.addEventListener('scroll', function() {
 - Add images to project cards
 - Learn about hosting your site
 
-Continue learning with:
-- [Advanced CSS Techniques](/docs/guides/tutorials/advanced-css/)
-- [JavaScript Fundamentals](/docs/guides/tutorials/javascript-basics/)
-- [Deploying Your Website](/docs/guides/how-to/deploy-site/)
+## Continue learning with:
+
+- [Advanced CSS Techniques](/docs/tutorials/advanced-css/)
+- [JavaScript Fundamentals](/docs/tutorials/javascript-basics/)
+- [Deploying Your Website](/docs/guides/deploy-site/)

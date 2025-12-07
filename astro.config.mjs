@@ -18,6 +18,9 @@ export default defineConfig({
 				{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/kentknowsme' },
 				{ icon: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/kentmschaeffer' },
 			],
+			customCss: [
+				'./src/styles/astro.global.css',
+			],
 	  		sidebar: [
 				{
 					label: 'Explanation',
