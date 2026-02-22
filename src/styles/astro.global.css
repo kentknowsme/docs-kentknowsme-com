@@ -2,5 +2,88 @@
    Global Styles - Kent Schaeffer Docs
    ========================================================================== */
 
-/* Font Imports */
+/* Merriweather Font styles */
+@layer base, starlight, theme, components, utilities;
+
+/* Tailwind CSS layers */
 @import url('https://fonts.bunny.net/css?family=merriweather:400,700');
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+:root {
+  /* Primary Color Palette - Portfolio Style */
+  --color-primary: #D4A574;
+  --color-primary-dark: #B08A5E;
+  --color-primary-light: #E5C8A0;
+  
+  /* Secondary Color Palette */
+  --color-secondary: #7A9B76;
+  --color-secondary-dark: #5F7A5C;
+  --color-secondary-light: #95B891;
+  
+  /* Accent Colors */
+  --color-accent: #C67B5C;
+  --color-accent-dark: #A65E44;
+  --color-success: #7A9B76;
+  --color-warning: #D4A574;
+  
+  /* Neutral Colors */
+  --color-background: #0f1923;
+  --color-background-alt: #1a2530;
+  --color-surface: #ecf0f1;
+  --color-border: rgba(212, 165, 116, 0.3);
+  --color-text: #ffffff;
+  --color-text-light: rgba(255, 255, 255, 0.85);
+  --color-text-muted: rgba(255, 255, 255, 0.6);
+  
+  /* Typography */
+  --font-primary: 'Merriweather', Georgia, serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  --font-heading: var(--font-primary);
+  
+  /* Font Sizes */
+  --font-size-base: 16px;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Layout */
+  --max-width-content: 1200px;
+  --max-width-text: 65ch;
+  --header-height: 5rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}

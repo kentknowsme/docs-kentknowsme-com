@@ -1,8 +1,7 @@
 ---
-title: Command Reference
+title: Linux Command Reference
 description: Complete reference for common Linux/Unix commands
-sidebar:
-  order: 1
+
 ---
 
 Quick reference for essential command-line tools used in system administration and development.
@@ -340,6 +339,3 @@ gzip -k file.txt        # Keep original
 
 ## See Also
 
-- [Bash Scripting Guide](/docs/guides/tutorials/bash-scripting/)
-- [System Administration Best Practices](/docs/explanation/sysadmin-practices/)
-- [Troubleshooting Commands](/docs/guides/how-to/troubleshooting/)

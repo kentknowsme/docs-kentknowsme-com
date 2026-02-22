@@ -1,29 +1,25 @@
 ---
-title: Welcome to the Kent Schaeffer Documentation project
-description: This is an ever-growing repository of sample technical documentation covering web development, DDI infrastructure, and system administration
-hero:
-  actions:
-    - text: Example Guide
-      link: /guides/example/
-      icon: right-arrow
-      variant: minimal
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
+title: Intro to Tutorials
+description: Several tutorial examples, ranging from basic to intermediate to advanced
+sidebar:
+  order: 1
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Quick Navigation
+## Highlighted Tutorial Examples
 
 <CardGrid>
-  <Card title="Tutorials" icon="document">
-    Start with a step-by-step learning guides for those new to the subject, or those who need a refresh.
-    
-    [Browse Tutorials →](/docs/guides/tutorials/)
-  </Card>
-  
+  <LinkCard 
+    title="Build Your First Basic Website"
+    description="Start with a step-by-step learning guide to help you build your first website"
+    href="basic/web-basics/"
+  />
+  <LinkCard 
+    title="Build Your First Basic Website"
+    description="Start with a step-by-step learning guide to help you build your first website"
+    href="basic/web-basics/"
+  />  
   <Card title="How-To Guides" icon="puzzle">
     Task-oriented guides for solving specific problems. Find solutions quickly.
     
@@ -42,11 +38,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     [Browse Explanations →](/docs/explanation/)
   </Card>
   
-  <Card title="Services" icon="rocket">
-    Check out the long list of services I can provide and contact me to help you with your next project!
-    
-    [Browse Services →](/docs/services/)
-  </Card></CardGrid>
+</CardGrid>
 
 ## What's Covered
 

@@ -1,0 +1,196 @@
+---
+title: Website Basics
+description: Required tools, concepts, and background knowledge for building your first website
+sidebar:
+  order: 2
+---
+
+import { Icon, Aside, Card, LinkCard } from '@astrojs/starlight/components';
+
+## Introduction
+
+This page covers the foundational concepts behind how websites work — what files are involved,
+how browsers render (display) them, and what tools you need before writing a single line of code.
+Nothing here requires prior programming experience, but familiarity with basic computer
+file management will help. If you know how to create a folder and save a file, you are
+already ahead of where most people start.
+
+---
+
+## Required Tools and Knowledge
+
+Any computer purchased in the last decade is capable of building and testing a basic website.
+No special hardware, no cloud subscription, no physical/dedicated server — just a filesystem,
+a text editor, and a browser. You probably already own everything you need, but let's review
+the requirements just in case.
+
+### Hardware
+
+There are no minimum performance requirements. A desktop, laptop, or server-class machine
+running a supported OS will do. If it can open a browser and a text editor at the same time without
+your computer catching fire, it qualifies.
+
+#### Operating System
+
+Recent versions of MacOS, Linux/Unix distributions, and Windows all support the workflow described
+in this tutorial.
+
+<Aside type="note" title="Platform Bias">
+  Steps throughout this tutorial default to macOS and Linux CLI examples, because that is
+  what the author uses and old habits die hard. Windows users can follow along using
+  PowerShell, Git Bash, or WSL2 for an equivalent command-line environment.
+</Aside>
+
+#### Command-Line Interface (CLI)
+
+OK, so I'm a keyboard junkie and have been for a long time. Thus, all steps provided for this tutorial 
+default to using the CLI. Point-and-click equivalents exist for every step and are noted inline where 
+the difference matters. If you are new to the terminal, refer to the [Computer Reference](/reference/computer/#terminal) for a
+brief orientation — it is less scary than it looks, and eventually you will wonder
+how you lived without it.
+
+#### Web browsers
+
+Every modern browser implements the same HTML5/CSS3/ES6+ standards. Any of the following will render
+this tutorial's output correctly. Pick the one that does not make you feel silently judged:
+
+<LinkCard title="Google Chrome" href="https://chrome.google.com" />
+<LinkCard title="Mozilla Firefox" href="https://mozilla.org/firefox" />
+<LinkCard title="Apple Safari" href="https://apple.com/safari" />
+<LinkCard title="Microsoft Edge" href="https://www.microsoft.com/en-us/edge" />
+
+<Aside type="caution" title="Avoid Internet Explorer">
+  Internet Explorer is end-of-life and has not been relevant since the Obama administration. It also 
+  does not support HTML5 semantic elements or modern CSS layout modules. Do not use it for development,
+  testing, or anything else.
+</Aside>
+
+### Text Editors
+
+Web page source files must be saved as plain UTF-8 encoded text. Rich-text formats such as
+`.docx` or `.rtf` embed invisible formatting characters that break HTML parsing. Do yourself a favor
+and use a dedicated code editor from day one:
+
+**GUI editors:** Visual Studio Code, Sublime Text, Notepad++, CoffeeCup HTML Editor
+
+**CLI editors:** Vim, Neovim, Nano, Emacs, Micro
+
+Visual Studio Code is recommended for beginners due to its built-in syntax highlighting, HTML tag completion,
+and live-preview extensions. Vim is recommended for people who enjoy explaining to others how to exit Vim.
+
+---
+
+## How Web Content Works
+
+### A Brief History
+
+<Aside type="note" title="Historical Context">
+  The early web consisted entirely of plain text files marked up with HTML tags. No styling, no scripting, 
+  mostly text and links to other text. Somehow people found this revolutionary, sooo last century! Let's move on
+  to doing the same thing, with a little more complexity.
+</Aside>
+
+Modern websites are still built on the same foundational technology. What has changed is
+the sophistication of the CSS rendering engine and the JavaScript runtime embedded in
+every browser. The core delivery mechanism — a browser requesting a file from a server
+and rendering the response — is unchanged since 1991. Tim Berners-Lee's original idea
+was solid enough that thirty-plus years of engineers have not managed to replace it,
+only pile things on top of it.
+
+### Static vs. Dynamic Content
+
+**Static content** is any file served exactly as it exists on disk: an HTML document,
+a CSS stylesheet, a JavaScript file, an image. The server delivers the raw bytes; the
+browser does all the rendering work. No database, no server-side processing, no moving
+parts to break at 2 AM. Static sites are fast, cheap to host, and trivial to cache.
+This tutorial builds a fully static site, which is a polite way of saying you will not
+need to debug a database connection tonight.
+
+**Dynamic content** is generated at request time by a server-side runtime (Node.js,
+Python, PHP, etc.) pulling from a database and assembling an HTML response on the fly.
+A CMS-backed blog, a shopping cart, or a user dashboard are common examples. Dynamic
+content is outside the scope of this tutorial — there is plenty of complexity to enjoy
+here first before opening that particular can of worms.
+
+Web content (meaning the text, images, formatting, structure) that you read or hear through your web browser is written by the owner of the website. It is usually written using code and/or formatting that can be understood and translated into hopefully a nice format that will give you information that you are seeking
+
+---
+
+## How a Browser Loads a Page
+
+When you open an HTML file — locally or from a remote URL — the browser executes this
+sequence whether you ask it to or not:
+
+1. **Parse HTML** — the browser reads the document top-to-bottom, building the
+   Document Object Model (DOM), a tree representation of every element on the page.
+2. **Fetch linked resources** — any `<link>`, `<script>`, or `<img>` tag referencing
+   an external file triggers a separate file load. For local development this means
+   files on your disk; in production it means HTTP requests.
+3. **Apply CSS** — the browser constructs the CSS Object Model (CSSOM) from all loaded
+   stylesheets and computes the final visual style of every DOM node.
+4. **Execute JavaScript** — scripts run after (or during, depending on tag placement
+   and attributes) the DOM is parsed, allowing code to read and modify page content.
+5. **Render and paint** — the browser composites the styled DOM into pixels on screen
+   and presents you with your creation, for better or worse.
+
+Understanding this sequence is genuinely useful later when you start asking "why is my
+script running before the element exists?" The answer is almost always step 4 referencing
+and element not rendered properly in step 1 or 2.
+
+---
+
+## Project File Anatomy
+
+A minimal single-page website requires one to three files. Not a monorepo, not a
+dependency tree with 847 packages — three files:
+
+| File | Role |
+|---|---|
+| `index.html` | Document structure and content |
+| `style.css` | Visual presentation and layout |
+| `script.js` | Runtime behavior and interactivity |
+
+<Aside type="note" title="Developer Comment">
+  Actually, to minimize files, all the components could be shoved into a single `index.html`
+  file that contains the content, layout, and interactivity all together. This is not a
+  best practice for good web development.
+</Aside>
+
+The filename `index.html` is a web server convention — it is the default document
+returned when a browser requests a directory path without specifying a filename.
+Use it as your entry point, and never name your main page file anything else unless you
+enjoy explaining to people why the URL needs a filename appended.
+
+### How Files Are Created
+
+Text editors write source files to your local filesystem. The only requirements are
+that the editor saves in plain-text UTF-8 format and that the file extension matches
+the content type: `.html` for markup, `.css` for stylesheets, `.js` for scripts.
+
+### How Files Are Viewed Locally
+
+Opening `index.html` directly in a browser via `File > Open` (or `open index.html` at
+the CLI) works for basic rendering. For pages that load external resources or use the
+`fetch()` API, browser security policy will block local file access with an error message
+that sounds worse than it is. In those cases, serve the files through a local HTTP server —
+the setup page covers this.
+
+### How Files Are Shared (Deployed)
+
+Hosting a static site means copying your files to a web server or static hosting platform.
+Common zero-cost options for learning projects include GitHub Pages, Netlify, and
+Cloudflare Pages. Each accepts a folder of static files and hands you a public URL.
+Deployment is covered in a later guide, after there is actually something worth deploying.
+
+---
+
+<Aside type="note">
+  The rest of this tutorial assumes you are comfortable with the concepts on this page.
+  Keep it open as a reference — no shame in scrolling back. That is what it is here for.
+</Aside>
+
+[^1]: Refer to the [Computer Reference](/reference/computer/#terminal) for CLI and Terminal background.
+[^2]: Refer to the [Computer Reference](/reference/computer/#file-format) for file encoding details.
+
+---
+---

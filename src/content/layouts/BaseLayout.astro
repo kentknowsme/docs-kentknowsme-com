@@ -5,11 +5,14 @@ import '../styles/astro.global.css';
 
 interface Props {
   title: string;
+  author: string;
+  publishDate?: string;
+  viewCount?: string;
   description: string;
   currentPath?: string;
 }
 
-const { title, description, currentPath = '/' } = Astro.props;
+const { title, author, publishDate, viewCount, description, currentPath = '/' } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -35,7 +38,11 @@ const { title, description, currentPath = '/' } = Astro.props;
   <Header currentPath={currentPath} />
   
   <slot />
-  
+  <section class="publish" style="height: 2rem;">
+    <p>Published on {publishDate}</p>
+    <p>Published by {author}</p>
+    <p>Viewed by {viewCount}</p>
+  </section>
   <Footer />
 </body>
 </html>

@@ -1,0 +1,531 @@
+---
+title: Create HTML Structure
+description: Build the HTML5 document structure and content for your profile page
+sidebar:
+  order: 4
+---
+
+import { Steps, Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Introduction
+
+HTML is the skeleton of every web page. It is not pretty on its own — and that is fine,
+because making it pretty is CSS's job. Your job right now is to build a solid structure
+that holds everything together: the navigation, the hero section, the about blurb, the
+skills grid, the contact form, and the footer.
+
+Think of HTML like framing a house. You are not painting walls or picking carpet yet.
+You are just making sure the rooms are in the right places and the doors actually lead
+somewhere useful.
+
+By the end of this step, opening `index.html` in a browser will show you a plain,
+unstyled page with real content on it. If it looks like something from 1996, then you have
+done it correctly.
+
+---
+
+## One File or Three?
+
+Before writing a single tag, you have a choice to make about *where* your CSS and
+JavaScript code will live.
+
+**The recommended approach — three separate files:**
+
+- `index.html` — your content and structure
+- `style.css` — your visual design
+- `script.js` — your interactive behavior
+
+Keeping them separate is the standard way professionals build websites. It keeps each
+file focused, easier to read, and easier to fix when something breaks (and something
+will always break).
+
+**The single-file approach — everything in `index.html`:**
+
+CSS goes inside a `<style>` block in the `<head>` section. JavaScript goes inside a 
+`<script>` block at the bottom of `<body>`. It works, and for small personal projects 
+it is not a crime. It just gets messy fast, like cooking an entire meal in one pan — 
+totally doable, but you will regret it when cleanup time comes.
+
+<Aside type="tip" title="Which should you pick?">
+  Follow the three-file approach in this tutorial. The single-file option is shown
+  alongside each relevant step so you know how it works, but the main instructions
+  assume separate files. Future tutorials build on that structure.
+</Aside>
+
+---
+
+## The HTML Boilerplate
+
+Every HTML file starts with the same basic skeleton. Most editors can generate it
+automatically, but take a few minutes to understand what each piece actually does.
+Copy-pasting code you do not understand is a lot like casting a spell you found in
+a library book — it might work, or you might end up transported *diagonally* instead
+of to Diagon Alley.[^3]
+
+Open `index.html` in your editor and type (or paste) this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <!-- Your page content goes here -->
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
+```
+
+Here is what each line does:
+
+**`<!DOCTYPE html>`** — Tells the browser this is a modern HTML5 document. Not a tag,
+just a declaration. Leave it as the very first line, always.
+
+**`<html lang="en">`** — The root element that wraps everything. The `lang` attribute
+tells browsers and screen readers what language the page is in. Change `"en"` if you are
+writing in another language — for example, `"es"` for Spanish, `"fr"` for French, or
+`"ja"` for Japanese.[^4][^5]
+
+**`<meta charset="UTF-8" />`** — Sets the character encoding. Without this, special
+characters like `é`, `ñ`, or `"smart quotes"` can turn into random garbage symbols.
+UTF-8 handles basically every character on earth, so just use it.
+
+**`<meta name="viewport" ...>`** — This one line is what makes your page not look
+terrible on a phone. Without it, mobile browsers zoom out and render your site as if it
+were being viewed through a telescope. Include it on every page, no exceptions.
+
+<Aside type="note" title="Meta Tags Do a Lot More">
+  The `<meta>` tag has uses well beyond charset and viewport — Open Graph tags for social
+  media previews, SEO description tags, cache control, theme colors, and more all live
+  here. That rabbit hole is outside the scope of this tutorial, but **MDN's meta element reference** [^6]
+  is the best place to explore them when you are ready.
+</Aside>
+
+**`<title>My Profile</title>`** — The text that appears on the browser tab. Change
+it to Me or whatever fits your page. It is also what shows up in search results,
+so make it something meaningful.
+
+**`<link rel="stylesheet" href="style.css" />`** — Connects your CSS file to the page.
+The `href` value must exactly match your CSS filename, including capitalization.
+
+**`<script src="script.js" defer></script>`** — Loads your JavaScript file. The `defer`
+attribute tells the browser to wait until the rest of the page is fully loaded before
+running the script. Put this at the bottom of `<body>`, not in `<head>`. If you put it
+in `<head>` without `defer`, your script will try to interact with elements that do not
+exist yet, which causes errors that are confusing to debug at any hour.
+
+---
+
+### Single-File Version of the Boilerplate
+
+If you are going the everything-in-one-file route, replace the `<link>` and `<script>`
+tags with embedded blocks like this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <style>
+      /* Your CSS goes here */
+    </style>
+  </head>
+  <body>
+
+    <!-- Your page content goes here -->
+
+    <script>
+      // Your JavaScript goes here
+    </script>
+  </body>
+</html>
+```
+
+Everything else in this tutorial is identical. When you see `style.css`, write it inside
+`<style>`. When you see `script.js`, write it inside `<script>`. Easy enough.
+
+---
+
+## Building the Page Sections
+
+Now fill in the `<!-- Your page content goes here -->` area with the actual page sections.
+Add them in order — HTML renders top to bottom, so the order in the file is the order
+on screen.
+
+### Navigation Bar
+
+The navigation bar is a list of links that jump to different sections of the same page.
+When a link says `href="#about"`, the browser scrolls to whatever element has `id="about"`.
+That connection — from the `href` in the nav to the `id` on a section — is how the whole
+single-page navigation works. Mess up the spelling on either end and the link goes nowhere,
+quietly, without an error message.
+
+```html
+<nav id="navbar">
+  <div class="nav-logo">Me</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+```
+
+<Aside type="note">
+  The `<nav>` element tells browsers, screen readers, and search engines "this is
+  the navigation bar." You could use a `<div>` and it would look identical — but `<nav>` refers
+  specifically to a navigation section. Using the right element for the right job is called 
+  writing *semantic HTML*, and it is a good habit to keep clean, working code.
+</Aside>
+
+---
+
+### Main Content Wrapper
+
+Before the hero section, add a `<main>` tag. It closes just before `<footer>`. Everything
+in between — hero, about, skills, contact — lives inside it.
+
+```html
+<main>
+  <!-- Hero, About, Skills, and Contact sections go here -->
+</main>
+```
+
+That is it. One opening tag, one closing tag, and suddenly every browser, screen reader,
+and search engine crawler knows exactly where the primary content of your page is.
+Screen readers use `<main>` to offer a "skip to main content" shortcut so keyboard users
+do not have to tab through the entire nav on every page load. You get that for free just
+by using the right element.
+
+There should be exactly one `<main>` per page — same rule as `<h1>`.
+
+---
+
+### Hero Section
+
+The hero section is the first thing visitors see — the big splashy area at the top with
+your name and a one-liner about who you are or what you do. This is your digital handshake,
+so make it count. Or at least make it not embarrassing.
+
+```html
+<header id="hero">
+  <div class="hero-content">
+    <h1>Hi, I'm Me</h1>
+    <p class="hero-tagline">I build things for the web — and occasionally break them too.</p>
+    <a href="#about" class="hero-button">Read More About Me</a>
+    <a href="#contact" class="hero-button">Get In Touch</a>
+  </div>
+</header>
+```
+
+**Why `<header>` and not `<section>`?** The top hero area is semantically the
+introductory header of the page, so `<header>` fits. Either works visually, but
+`<header>` carries more meaning. One `<h1>` per page is the rule — it is the headline,
+the main event. Everything else on the page uses `<h2>`, `<h3>`, and so on in order.
+Skipping heading levels (going from `<h1>` straight to `<h3>`) confuses screen readers
+and is generally considered bad form.
+
+---
+
+### About Section
+
+Short, human, and written in first person. This is where you tell people who you are
+in a short paragraph. Nobody reads walls of text here — they just want to know
+if you are interesting enough to scroll further.
+
+```html
+<section id="about">
+  <div class="container">
+    <h2>About Me</h2>
+    <p>
+      I'm a web developer based in [Your City] with a passion for building clean,
+      fast, accessible websites. When I'm not writing code, I'm probably drinking
+      too much coffee and dreaming or creating strong opinions about text editors.
+    </p>
+  </div>
+</section>
+```
+
+The `<section>` element groups a thematic block of content. The `<div class="container">`
+inside it is just a wrapper we will use in CSS to control the max width and center the
+content. It has no semantic meaning — it is purely a styling hook. It also helps group
+lots of content into manageable sections together on the page - useful for when
+troubleshooting page issues.
+
+---
+
+### Skills Grid
+
+List out the technologies, tools, or skills you want to highlight. Right now this will
+look like a plain unformatted word list. The CSS step turns it into a clean tag grid - note
+the `class` tags in the `div` and `span` elements.
+
+```html
+<section id="skills">
+  <div class="container">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <span class="skill-tag">HTML5</span>
+      <span class="skill-tag">CSS3</span>
+      <span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">Git</span>
+      <span class="skill-tag">Responsive Design</span>
+      <span class="skill-tag">VS Code</span>
+      <span class="skill-tag">Command Line</span>
+      <span class="skill-tag">Web Development</span>
+      <span class="skill-tag">Problem Solving</span>
+    </div>
+  </div>
+</section>
+```
+
+<Aside type="tip">
+  Replace or add to these with your actual skills. "Problem Solving" is on the list
+  because it is genuinely useful and every hiring manager has seen it on a résumé.
+  Feel free to swap it for something more specific to you.
+</Aside>
+
+---
+
+### Contact Form
+
+The contact form is where visitors can send you a message. Right now it does not
+actually *send* anything — that requires a backend service, which is a topic for
+another tutorial. What it will do, after the JavaScript step, is validate the fields
+and give the user feedback. That is still useful, and it looks fully functional.
+
+```html
+<section id="contact">
+  <div class="container">
+    <h2>Get In Touch</h2>
+    <p>Have a question or want to work together? Fill out the form below.</p>
+    <form id="contact-form" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="What's on your mind?"></textarea>
+      </div>
+      <button type="submit" class="submit-button">Send Message</button>
+      <p id="form-feedback" class="form-feedback hidden"></p>
+    </form>
+  </div>
+</section>
+```
+
+A few things worth pointing out here:
+
+**`<label for="name">` paired with `<input id="name">`** — The `for` attribute on the
+label must match the `id` on the input. This links them together so that clicking the
+label text also focuses the input field. It is a small thing that makes the form much
+nicer to use on mobile, and it is required for screen readers to work correctly.
+
+**`novalidate` on `<form>`** — This turns off the browser's built-in validation popups
+so your custom JavaScript validation (added in the next step) is the only thing that
+runs. Without `novalidate`, the browser and your script will both try to validate the
+form and argue about it. you do not want to the them fight - unless you have a reason
+to want more therapy!
+
+**`<p id="form-feedback" class="form-feedback hidden">`** — This paragraph is invisible
+by default (CSS will handle the `hidden` class). The JavaScript step will put a success
+or error message here and reveal it when the form is submitted. It is sitting here now
+so the JS has something to find.
+
+---
+
+### Footer
+
+Short, simple, and at the bottom. A copyright line and maybe a link or two.
+
+```html
+<footer id="footer">
+  <div class="container">
+    <p>&copy; 2025 Me. All rights reserved.</p>
+  </div>
+</footer>
+```
+
+`&copy;` is an HTML *entity* — a special code for the © symbol. It works in every
+browser and every character encoding. Typing the symbol directly also works in UTF-8,
+but using the entity is the safer habit if you ever end up working with older systems
+that have encoding quirks.
+
+---
+
+## Full index.html Listing
+
+Here is the complete file assembled in one place. If you have been building along
+section by section, compare yours to this and make sure nothing is missing or out of order.
+If you are just starting, copy this whole block and then go back and read the section
+explanations — understanding what you pasted is more useful than typing it blind.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="nav-logo">Me</div>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <!-- Hero -->
+    <header id="hero">
+      <div class="hero-content">
+        <h1>Hi, I'm Me</h1>
+        <p class="hero-tagline">I build things for the web — and occasionally break them too.</p>
+        <a href="#contact" class="hero-button">Get In Touch</a>
+      </div>
+    </header>
+
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <h2>About Me</h2>
+        <p>
+          I'm a web developer based in [Your City] with a passion for building clean,
+          fast, accessible websites. When I'm not writing code, I'm probably drinking
+          too much coffee and having strong opinions about text editors.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="container">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Responsive Design</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Command Line</span>
+          <span class="skill-tag">Problem Solving</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <h2>Get In Touch</h2>
+        <p>Have a question or want to work together? Fill out the form below.</p>
+        <form id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="What's on your mind?"></textarea>
+          </div>
+          <button type="submit" class="submit-button">Send Message</button>
+          <p id="form-feedback" class="form-feedback hidden"></p>
+        </form>
+      </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <p>&copy; 2025 Me. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
+```
+
+<Aside type="note" title="Single-File Reminder">
+  If you are using the single-file approach, replace `<link rel="stylesheet" href="style.css" />`
+  with `<style> /* CSS goes here */ </style>` in the `<head>`, and replace
+  `<script src="script.js" defer></script>` with `<script> // JS goes here </script>`
+  just before `</body>`. All the HTML in between stays exactly the same.
+</Aside>
+
+---
+
+## Save and Take a Peek
+
+Save `index.html`, open it in your browser, and take a look. You will see plain black
+text on a white background with no spacing or styling. It will look rough. That is not
+broken — that is HTML doing its job by itself with no CSS to help it.
+
+Click one of the nav links. If it scrolls to (or jumps to) the right section, the
+anchor link connections are working. That is real functionality right there, with zero
+JavaScript and zero CSS.
+
+<Aside type="tip">
+  If a nav link does nothing when you click it, open your browser's developer tools
+  (press **F12**), click the **Console** tab, and look for errors. Usually it means
+  the `href` value on the link does not exactly match the `id` on the section.
+  Capitalization counts — `#About` and `#about` are two different targets as far as
+  the browser is concerned.
+</Aside>
+
+---
+
+## What You Learned
+
+- Every HTML page starts with the same boilerplate — DOCTYPE, `<html>`, `<head>`, `<body>`
+- The viewport meta tag is the one line standing between your page and a terrible mobile experience
+- Semantic elements like `<nav>`, `<header>`, `<main>`, `<section>`, and `<footer>` give structure meaning beyond just looks — and `<main>` is what screen readers use to skip straight to your content
+- Anchor links connect `href="#id"` in the nav to `id="id"` on a section — match them exactly
+- Labels and inputs need matching `for`/`id` pairs to work correctly for all users
+- The single-file approach (CSS in `<style>`, JS in `<script>`) works but does not scale well
+
+---
+
+## Next Steps
+
+- Proceed to [Add CSS Styling](/tutorials/build/styling/) — where this wall of unstyled
+text gets an actual personality.
+
+[^3]: In *Harry Potter and the Philosopher's Stone* (2001), a flustered Harry tries to
+      travel by Floo Powder and says "Diagon Alley" — but it comes out as "diagonally,"
+      landing him in the wrong shop entirely. Debugging bad copy-paste code feels
+      exactly like this.
+
+[^4]: See the [IANA Language Subtag Registry](https://www.iana.org/assignments/language-subtag-registry)
+for the full list of two-letter codes
+[^5]: See the friendlier [W3C language tag lookup tool](https://r12a.github.io/app-subtags/) if you want to
+search by language name instead of memorizing abbreviations.
+[^6]: [MDN's meta element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)

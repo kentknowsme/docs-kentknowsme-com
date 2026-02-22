@@ -5,7 +5,7 @@ description: A Style Guide for my new Starlight docs site.
 
 # Content Style Guide
 
-This style guide establishes standards for writing, formatting, and presenting technical documentation. It draws from Diataxis quality principles and Mailchimp content standards.
+This style guide establishes standards for writing, formatting, and presenting technical documentation. It draws from [Diataxis](https://diataxis.fr/) quality principles and Mailchimp content standards.
 
 ## Voice and Tone
 
@@ -16,6 +16,8 @@ Write clear, concise technical content that respects the reader's time and exper
 **Do:** Use active voice. Write "The system processes requests" not "Requests are processed by the system."
 
 **Do:** Address readers directly when appropriate. Use "you" in tutorials and how-to guides.
+
+**Do:** Define all deep technical jargon in a reference page and anchor, then link from each use, or at least refer to the reference page on the page with technical jargon and add footnotes.
 
 **Don't:** Use jargon without definition. If technical terms are necessary, define them on first use.
 
@@ -41,7 +43,7 @@ Structure: State the goal upfront. List prerequisites. Provide steps without exc
 
 Information-oriented content providing technical specifications. Structure mirrors code architecture. Accuracy is paramount.
 
-Structure: Consistent formatting for similar elements. Complete parameter lists. Type information. Return values. Error conditions.
+Structure: Consistent formatting for similar elements. Complete parameter lists. Type information. Return values. Error conditions. Technical jargon.
 
 ### Explanation
 

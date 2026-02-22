@@ -1,11 +1,9 @@
 ---
-title: Building Your First Website
+title: Build Your First Website
 description: A complete tutorial for creating a simple responsive website from scratch
-sidebar:
-  order: 1
 ---
 
-This tutorial guides you through building a complete, responsive website. You'll learn HTML structure, CSS styling, and basic JavaScript interactivity.
+This is a simple tutorial that guides you through building a complete, responsive website. You'll learn HTML structure, CSS styling, and basic JavaScript interactivity.
 
 ## What You'll Build
 
@@ -18,6 +16,7 @@ A single-page portfolio website with:
 
 ## Prerequisites
 
+- Computer with a running Operating System (Mac, Linux)
 - Text editor (VS Code, Sublime Text, or similar)
 - Web browser (Chrome, Firefox, or Safari)
 - Basic computer skills
@@ -344,5 +343,5 @@ window.addEventListener('scroll', function() {
 ## Continue learning with:
 
 - [Advanced CSS Techniques](/docs/tutorials/advanced-css/)
-- [JavaScript Fundamentals](/docs/tutorials/javascript-basics/)
-- [Deploying Your Website](/docs/guides/deploy-site/)
+<!-- - [JavaScript Fundamentals](/docs/tutorials/javascript-basics/) -->
+- [Deploy Your Website](/docs/guides/deploy-site/)
