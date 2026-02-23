@@ -60,7 +60,7 @@ Every HTML file starts with the same basic skeleton. Most editors can generate i
 automatically, but take a few minutes to understand what each piece actually does.
 Copy-pasting code you do not understand is a lot like casting a spell you found in
 a library book — it might work, or you might end up transported *diagonally* instead
-of to Diagon Alley.[^3]
+of to Diagon Alley.[^1]
 
 Open `index.html` in your editor and type (or paste) this:
 
@@ -90,7 +90,7 @@ just a declaration. Leave it as the very first line, always.
 **`<html lang="en">`** — The root element that wraps everything. The `lang` attribute
 tells browsers and screen readers what language the page is in. Change `"en"` if you are
 writing in another language — for example, `"es"` for Spanish, `"fr"` for French, or
-`"ja"` for Japanese.[^4][^5]
+`"ja"` for Japanese.[^2][^3]
 
 **`<meta charset="UTF-8" />`** — Sets the character encoding. Without this, special
 characters like `é`, `ñ`, or `"smart quotes"` can turn into random garbage symbols.
@@ -103,7 +103,7 @@ were being viewed through a telescope. Include it on every page, no exceptions.
 <Aside type="note" title="Meta Tags Do a Lot More">
   The `<meta>` tag has uses well beyond charset and viewport — Open Graph tags for social
   media previews, SEO description tags, cache control, theme colors, and more all live
-  here. That rabbit hole is outside the scope of this tutorial, but **MDN's meta element reference** [^6]
+  here. That rabbit hole is outside the scope of this tutorial, but **MDN's meta element reference** [^4]
   is the best place to explore them when you are ready.
 </Aside>
 
@@ -519,13 +519,12 @@ JavaScript and zero CSS.
 - Proceed to [Add CSS Styling](/tutorials/build/styling/) — where this wall of unstyled
 text gets an actual personality.
 
-[^3]: In *Harry Potter and the Philosopher's Stone* (2001), a flustered Harry tries to
-      travel by Floo Powder and says "Diagon Alley" — but it comes out as "diagonally,"
-      landing him in the wrong shop entirely. Debugging bad copy-paste code feels
-      exactly like this.
-
-[^4]: See the [IANA Language Subtag Registry](https://www.iana.org/assignments/language-subtag-registry)
+[^1]: In [*Harry Potter and the Philosopher's Stone* (2001)](https://www.imdb.com/title/tt0241527/),
+      a flustered Harry tries to travel by Floo Powder and says "Diagon Alley" — but it
+      comes out as "diagonally," landing him in the wrong shop entirely. Debugging bad
+      copy-paste code feels exactly like this.
+[^2]: See the [IANA Language Subtag Registry](https://www.iana.org/assignments/language-subtag-registry)
 for the full list of two-letter codes
-[^5]: See the friendlier [W3C language tag lookup tool](https://r12a.github.io/app-subtags/) if you want to
+[^3]: See the friendlier [W3C language tag lookup tool](https://r12a.github.io/app-subtags/) if you want to
 search by language name instead of memorizing abbreviations.
-[^6]: [MDN's meta element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)
+[^4]: [MDN's meta element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)

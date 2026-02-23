@@ -1,41 +1,41 @@
----
+--
 title: Prepare the Project Environment
 description: Create the directory structure and starter files for your first single-page website
 sidebar:
   order: 3
 ---
 
-import { Steps, Aside, Code, FileTree } from '@astrojs/starlight/components';
+import { Steps, Aside, FileTree } from '@astrojs/starlight/components';
 
 ## Introduction
 
-In this step you will create the project directory and the three source files your site requires.
-By the end you will have a working scaffold — empty, yes, but *structurally* valid and
-ready for content. Empty files have a certain optimistic quality to them.
+Create the project directory and the three source files your site requires. By the end,
+you will have a working scaffold — empty, yes, but structurally ready for content.
+Blank files have a certain optimistic quality to them.
 
 ---
 
 ## What You Are Building
 
-Throughout this tutorial you will construct a single-page personal profile site.
-The finished page will include:
+Throughout this tutorial you will build a single-page personal profile site. The
+finished page will include:
 
 - A sticky top navigation bar with internal anchor links
-- A hero section with a name, title, and brief tagline
-- An "About" section with a short bio paragraph
+- A hero section with a name, title, tagline, and scroll indicator
+- An "About" section with a short bio
 - A skills grid displaying technology tags
 - A contact form with name, email, and message fields
 - A footer with copyright text
 
-The entire site lives in one HTML file, one CSS file, and one JavaScript file.
-No build tools, no package manager, no framework, no opinions about which framework
-you should have used instead. Open the HTML file in a browser and it works.
+The entire site lives in one HTML file, one CSS file, and one JavaScript file. No build
+tools, no package manager, no framework, no opinions about which framework you should
+have used instead. Open the HTML file in a browser and it works.
 
 ---
 
 ## Prerequisites
 
-- A text editor installed (VS Code recommended — see [Website Basics](/tutorials/build/basics/))
+- A text editor installed — see [Website Basics](/tutorials/build/basics/) for recommendations
 - A terminal or CLI environment
 - A web browser
 - Approximately fifteen minutes and a reasonable tolerance for angle brackets
@@ -48,45 +48,62 @@ you should have used instead. Open the HTML file in a browser and it works.
 
 ### Create the Project Directory
 
-Choose a parent directory where you keep development projects, then create a new
-folder for this site. The folder name becomes your project identifier — keep it
-lowercase with hyphens, no spaces. Spaces in directory names are technically allowed
-and yet very regrettable.
+Choose a parent directory where you keep development projects, then create a new folder.
+Keep the name lowercase with hyphens and no spaces — spaces in directory names are
+technically allowed and practically regrettable.
 
-**CLI:**
+**CLI (macOS / Linux):**
 
 ```bash
 mkdir -p ~/projects/my-profile-site
 cd ~/projects/my-profile-site
 ```
 
+**CLI (Windows PowerShell):**
+
+```powershell
+New-Item -ItemType Directory -Path "$HOME\projects\my-profile-site"
+Set-Location "$HOME\projects\my-profile-site"
+```
+
 **GUI equivalent:** Open Finder or File Explorer, navigate to your projects folder,
 and create a new folder named `my-profile-site`.
+
+---
 
 ### Create the Source Files
 
 Three empty files are all you need. One command handles all of them:
 
-**CLI (bash/zsh):**
+**CLI (macOS / Linux):**
 
 ```bash
 touch index.html style.css script.js
 ```
 
-**CLI (PowerShell/Windows):**
+**CLI (Windows PowerShell):**
 
 ```powershell
 New-Item index.html, style.css, script.js -ItemType File
 ```
 
-**GUI equivalent:** In VS Code, use `File > New File` three times, saving each with
-the appropriate name and extension into the project folder. It is slightly more
-ceremonial but equally valid.
+**GUI equivalent:** In VS Code, use `File > New File` three times, saving each with the
+appropriate name and extension into the project folder.
+
+<Aside type="caution" title="Filename matters">
+  The CSS file in this tutorial is named `style.css` — not `styles.css`. The name must
+  match exactly what is referenced in the `<link>` tag inside `index.html`. A one-letter
+  difference is all it takes to spend twenty minutes wondering why your CSS is not loading.
+</Aside>
+
+---
 
 ### Verify the Structure
 
-Confirm all three files exist before continuing — catching a typo in a filename now
-is much less annoying than debugging a missing stylesheet reference twenty minutes later:
+Confirm all three files exist before moving on — catching a typo in a filename now is
+much less frustrating than debugging a missing stylesheet reference later:
+
+**CLI:**
 
 ```bash
 ls -1
@@ -94,7 +111,7 @@ ls -1
 
 Expected output:
 
-```bash
+```
 index.html
 script.js
 style.css
@@ -110,16 +127,18 @@ Your project tree should look like this:
 </FileTree>
 
 <Aside type="tip">
-  Open the project folder in your editor now so all three files are visible in the
-  file tree. In VS Code: `code .` from within the project directory. Future you
-  will appreciate not hunting for files mid-tutorial.
+  Open the project folder in your editor now so all three files are visible in the file
+  tree. In VS Code: `code .` from within the project directory. Future you will
+  appreciate not hunting for files mid-tutorial.
 </Aside>
+
+---
 
 ### (Optional) Initialize a Git Repository
 
-Version control is not required to finish this tutorial, but initializing a repo
-now costs thirty seconds and gives you a full rollback history as you build.
-When you inevitably want to undo something, you will be glad it is there.
+Version control is not required to finish this tutorial, but initializing a repo now
+costs thirty seconds and gives you a full rollback history as you build. When you
+inevitably want to undo something, you will be glad it is there.[^1]
 
 ```bash
 git init
@@ -129,16 +148,17 @@ git commit -m "Initial project scaffold"
 
 <Aside type="note">
   If Git is not installed, skip this step — it has no effect on the tutorial output.
-  If you want Git but do not have it, the [Git download page](https://git-scm.com/downloads)
-  will sort you out, or at least get you started.
+  Download it from [git-scm.com](https://git-scm.com/downloads) when you are ready.
 </Aside>
+
+---
 
 ### (Optional) Start a Local HTTP Server
 
-Opening `index.html` directly via the browser works fine for everything in this tutorial.
-If you later add `fetch()` calls or ES module imports, browser CORS policy will stop you
-cold with an error that looks alarming but is actually a straightforward fix: serve the
-files over HTTP instead of the `file://` protocol.
+Opening `index.html` directly via the browser works fine for everything in this
+tutorial. If you later add `fetch()` calls or ES module imports, browser CORS policy
+will block them over the `file://` protocol. The fix is straightforward — serve the
+files over HTTP instead:
 
 **Python 3 (built-in, no install needed):**
 
@@ -146,16 +166,19 @@ files over HTTP instead of the `file://` protocol.
 python3 -m http.server 8080
 ```
 
+Open `http://localhost:8080` in your browser.
+
 **Node.js (npx, also no install needed):**
 
 ```bash
 npx serve .
 ```
 
-Both serve the current directory locally — Python at `http://localhost:8080`,
-`serve` at `http://localhost:3000`. Open that URL in your browser and you are
-running a real web server on your own machine, which sounds more impressive at
-parties than it probably should.
+Open `http://localhost:3000` in your browser.
+
+Both do the same job — serve your project folder as a local website. Pick whichever
+runtime you already have installed. Running a web server on your own machine sounds
+more impressive at parties than it probably should.
 
 </Steps>
 
@@ -163,10 +186,9 @@ parties than it probably should.
 
 ## Summary
 
-You have a project directory at `~/projects/my-profile-site/` with three empty,
-correctly named, UTF-8 plain-text files. The scaffold is ready. Next up: filling
+You now have a project directory at `~/projects/my-profile-site/` containing three
+empty, correctly named, UTF-8 plain-text files. The scaffold is ready. Next up: filling
 `index.html` with a valid HTML5 document structure — which is where things start
-to look like an actual website.
+to actually look like a website.
 
----
----
+[^1]: [Pro Git — Getting Started](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control) — the official, free, complete Git reference book. Chapter 1 covers everything you need to get started without overwhelming you with the advanced stuff.

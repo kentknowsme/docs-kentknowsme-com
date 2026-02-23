@@ -1,32 +1,1075 @@
 ---
 title: Add CSS Styling
-description: Create the CSS file to set styling for all elements of the HTML page
+description: Write the CSS3 stylesheet to control layout, typography, and visual design
 sidebar:
   order: 5
 ---
+
+import { Steps, Aside, Code } from '@astrojs/starlight/components';
+
 ## Introduction
 
-Open a new CSS file in your favorite editor
+If HTML is the skeleton, CSS is everything else — the skin, the clothes, the haircut,
+the decision to use a readable font instead of whatever Comic Sans was trying to be.
+CSS controls color, spacing, layout, typography, and how the page responds to different
+screen sizes.
 
-## Tutorial Summarization
+The good news: you do not need a design degree to make something that looks clean and
+professional. A handful of well-chosen rules goes a long way. The other news: CSS has
+a reputation for being unpredictable, mostly because it is doing a lot of invisible
+math on your behalf. Once you understand the logic, it stops feeling like it is out
+to get you. Mostly.
 
-### What You Learned
+By the end of this step your profile page will have a real layout, a color scheme,
+styled typography, and a skills grid that actually looks like a grid.
 
-- HTML document structure
-- CSS layout with Flexbox and Grid
-- Responsive design with media queries
-- Basic JavaScript interactivity
-- Form handling
+---
 
-### Next Steps
+## Where Your CSS Lives
 
-- Add more projects to your portfolio
-- Customize colors and fonts
-- Add images to project cards
-- Learn about hosting your site
+If you are following the three-file approach, open `style.css` and write everything
+in this tutorial there.
 
-### Continue learning with:
+<Aside type="note" title="Single-File Approach">
+  If you are keeping everything in `index.html`, add your CSS inside the `<style>` block
+  in the `<head>`. Everything in this tutorial works identically either way — the only
+  difference is which file you are typing in.
+</Aside>
 
-- [Advanced CSS Techniques](/docs/tutorials/advanced-css/)
-- [JavaScript Fundamentals](/docs/tutorials/javascript-basics/)
-- [Deploying Your Website](/docs/guides/deploy-site/)
+---
+
+## The Box Model
+
+Before writing a single rule, understand the box model — it is the one concept that
+explains most of the "why is this not where I expected it to be" moments in CSS.
+
+Every element on a web page is a rectangular box. That box has four layers, from inside out:
+
+- **Content** — the actual text or image inside the element
+- **Padding** — space between the content and the border
+- **Border** — the outline around the element (can be visible or invisible)
+- **Margin** — space between this element and everything around it
+
+By default, browsers calculate element widths in a way that will make you want to throw
+your laptop: if you set `width: 200px` and add `padding: 20px`, the actual rendered
+width becomes 240px. The padding is added *on top of* the stated width, which is almost
+never what you want.
+
+Fix this globally, right at the top of your stylesheet, before anything else:
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+```
+
+With `border-box`, padding and border are included *inside* the stated width.
+`width: 200px` with `padding: 20px` stays 200px wide. The internet largely agrees this
+should have been the default all along, but here we are.
+
+---
+
+## CSS Reset
+
+Browsers ship with their own built-in default styles — margins on headings, padding on
+lists, that slightly-too-small base font size. These defaults are inconsistent across
+browsers, which means without a reset, your page will look slightly different in Chrome,
+Firefox, and Safari for no reason you can easily explain.
+
+Add this after the box-sizing rule:
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+```
+
+Zeroing out margin and padding on everything gives you a clean, predictable baseline.
+`line-height: 1.6` makes body text comfortable to read — anything below 1.4 starts to
+feel cramped, anything above 1.8 starts to feel like the text is trying to escape the page.
+
+---
+
+## Custom Properties (CSS Variables)
+
+Hard-coding color values and font names throughout a stylesheet is a maintenance trap.
+Change the brand color six months later and you are doing a find-and-replace across
+three hundred lines. CSS custom properties solve this — define your values once at the
+top, reference them everywhere, change them in one place.
+
+Add these to the top of your stylesheet, inside a `:root` block:
+
+```css
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f8fafc;
+  --color-text: #1e293b;
+  --color-text-light: #64748b;
+  --color-border: #e2e8f0;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+
+  --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  --radius: 0.5rem;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --transition: 0.3s ease;
+}
+```
+
+Custom properties use the `--name` syntax and are referenced with `var(--name)`.
+The `:root` selector is the top of the document tree — variables defined there are
+available everywhere on the page. You will see them used throughout the rest of the
+stylesheet. Feel free to swap the color values to match your own taste — this is
+your site, after all.
+
+<Aside type="tip">
+  Not sure what those hex color codes look like? Paste any of them into
+  [coolors.co](https://coolors.co) or open the color picker in VS Code by hovering
+  over a hex value. You can swap them for anything you like without breaking
+  the layout.
+</Aside>
+
+---
+
+## Base Typography
+
+With the reset and variables in place, set the base body styles and heading scale:
+
+```css
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-light);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+```
+
+The heading sizes use a scale so each level is visually distinct without making
+any of them feel random. The `line-height: 1.2` on headings tightens them up compared
+to body text — large text needs less vertical space between lines to feel intentional
+rather than accidental.
+
+---
+
+## Container Utility
+
+Most sections use a `<div class="container">` wrapper in the HTML. Style that once
+here and every section that uses it gets the same max-width and centering behavior
+automatically:
+
+```css
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+```
+
+`max-width: 960px` prevents lines of text from stretching uncomfortably wide on large
+monitors. `margin: 0 auto` centers the container horizontally when the viewport is
+wider than 960px. The padding on the sides keeps content from pressing right against
+the edge of the screen on narrow viewports — without it, mobile users get text
+touching the screen bezel, which looks unfinished.
+
+---
+
+## Navigation Bar
+
+```css
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  transition: box-shadow var(--transition);
+}
+
+#navbar.scrolled {
+  box-shadow: var(--shadow);
+}
+
+.nav-logo {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacing-lg);
+  list-style: none;
+}
+
+.nav-links a {
+  font-weight: 500;
+  color: var(--color-text);
+  transition: color var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+```
+
+`position: sticky` keeps the nav pinned to the top of the viewport as you scroll,
+without pulling it out of the normal document flow the way `position: fixed` does.
+The difference matters: fixed elements overlap your content and require manual offset
+adjustments; sticky elements stay put only when they reach the edge, and play nicer
+with the rest of the page.
+
+The `#navbar.scrolled` rule does nothing by itself — it is waiting for the JavaScript
+step to add the `scrolled` class to the nav element when the user scrolls down.
+That is the JS/CSS handshake in action: JavaScript decides *when* something happens,
+CSS decides *what it looks like* when it does.
+
+`z-index: 100` ensures the nav sits on top of any other content it overlaps while
+sticky. Without it, sections with background colors or images can bleed over the
+nav as they scroll past, which looks like a glitch.
+
+---
+
+## Hero Section
+
+```css
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+#hero h1 {
+  color: #ffffff;
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.hero-tagline {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-button {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: #ffffff;
+  color: var(--color-primary);
+  border-radius: var(--radius);
+  font-weight: 700;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  transition: color var(--transition);
+}
+
+.scroll-indicator:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.scroll-arrow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+```
+
+`min-height: 100vh` makes the hero fill at least the full viewport height — `min-height`
+rather than `height` so it can still grow taller if the content needs more space on
+small screens. The flexbox centering (`align-items: center` and `justify-content: center`)
+is the modern, clean way to center something both vertically and horizontally. This used
+to require elaborate CSS hacks, which is why older developers get a slightly haunted
+look when someone mentions vertical centering.
+
+The button's `:hover` state uses `transform: translateY(-2px)` to nudge it up two pixels
+on hover — a subtle lift effect that makes interactive elements feel physical without
+being dramatic about it.
+
+---
+
+## About Section
+
+```css
+#about {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg);
+}
+
+#about h2 {
+  margin-bottom: var(--spacing-lg);
+}
+
+#about p {
+  font-size: var(--font-size-lg);
+  max-width: 65ch;
+}
+```
+
+The `max-width: 65ch` on the paragraph limits the line length to roughly 65 characters.
+`ch` is a CSS unit equal to the width of the zero character in the current font — it is
+the most accurate way to control readable line length. Research on reading comfort
+generally lands between 50 and 75 characters per line; 65 is a solid middle ground.[^1]
+
+---
+
+## Skills Grid
+
+```css
+#skills {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-alt);
+}
+
+#skills h2 {
+  margin-bottom: var(--spacing-lg);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.skill-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-primary);
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+```
+
+`grid-template-columns: repeat(auto-fit, minmax(130px, 1fr))` is doing more work than
+it looks like. `auto-fit` tells the grid to create as many columns as will fit.
+`minmax(130px, 1fr)` sets each column's minimum width to 130px and lets it grow to
+fill available space equally. The result: a grid that automatically adjusts its column
+count based on screen width, with zero media queries. On a wide screen you get six or
+seven columns; on a phone you get two or three. The browser handles the math.
+
+---
+
+## Contact Form
+
+```css
+#contact {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg);
+}
+
+#contact h2 {
+  margin-bottom: var(--spacing-md);
+}
+
+#contact-form {
+  max-width: 600px;
+  margin-top: var(--spacing-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-lg);
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+
+input,
+textarea {
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.submit-button:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.form-feedback {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  font-weight: 500;
+}
+
+.form-feedback.success {
+  background-color: #dcfce7;
+  color: var(--color-success);
+}
+
+.form-feedback.error {
+  background-color: #fee2e2;
+  color: var(--color-error);
+}
+
+.hidden {
+  display: none;
+}
+```
+
+Notice `outline: none` on the focus state — but it is immediately replaced with a visible
+`box-shadow` focus ring. Removing the focus outline without replacing it is an
+accessibility failure; keyboard users rely on it to see which element is active.
+The custom ring here looks better than the browser default and still does its job.[^2]
+
+`resize: vertical` on the textarea lets users drag it taller if they need more space,
+but prevents horizontal resizing that would break the layout. A small touch that
+removes a common frustration.
+
+---
+
+## Footer
+
+```css
+#footer {
+  padding: var(--spacing-lg) 0;
+  background-color: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+#footer p {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin-bottom: 0;
+}
+```
+
+---
+
+## Responsive Design
+
+Most of the layout already adapts to small screens automatically — the skills grid
+reflows, the container padding keeps content from touching the edges, and flexbox
+handles the nav alignment. The main things that need explicit attention at smaller
+sizes are the navigation and the large hero heading.
+
+Add these media queries at the bottom of `style.css`:
+
+```css
+/* Tablet — 768px and below */
+@media (max-width: 768px) {
+  h1 { font-size: var(--font-size-2xl); }
+  h2 { font-size: var(--font-size-xl); }
+
+  #navbar {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+
+  .nav-links {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Mobile — 480px and below */
+@media (max-width: 480px) {
+  h1 { font-size: var(--font-size-xl); }
+
+  .hero-tagline {
+    font-size: var(--font-size-base);
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+```
+
+Media queries are CSS's way of saying "apply these rules *only* when the screen is
+this size or smaller." The `max-width` value is called a *breakpoint* — you are
+breaking the layout intentionally at a specific width and redirecting it somewhere
+better. Think of it less as fixing things and more as giving the layout different
+instructions for different situations.
+
+<Aside type="tip">
+  Test your breakpoints by slowly resizing your browser window from wide to narrow
+  while watching the layout respond. It is more informative than jumping straight to
+  a phone emulator, and oddly satisfying when the grid reflows exactly where you
+  expected it to.
+</Aside>
+
+---
+
+## Full style.css Listing
+
+Here is the complete stylesheet assembled in order. The structure matters: reset and
+variables at the top, base styles next, then section-by-section, media queries last.
+CSS reads top to bottom and later rules override earlier ones — if the order gets
+scrambled, you will start seeing styles cancel each other out in ways that are tedious
+to untangle.
+
+```css
+/* =============================================
+   RESET & BOX MODEL
+   ============================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================================
+   CUSTOM PROPERTIES
+   ============================================= */
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f8fafc;
+  --color-text: #1e293b;
+  --color-text-light: #64748b;
+  --color-border: #e2e8f0;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+
+  --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  --radius: 0.5rem;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --transition: 0.3s ease;
+}
+
+/* =============================================
+   BASE STYLES
+   ============================================= */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-light);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =============================================
+   CONTAINER
+   ============================================= */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* =============================================
+   NAVIGATION
+   ============================================= */
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  transition: box-shadow var(--transition);
+}
+
+#navbar.scrolled {
+  box-shadow: var(--shadow);
+}
+
+.nav-logo {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacing-lg);
+  list-style: none;
+}
+
+.nav-links a {
+  font-weight: 500;
+  color: var(--color-text);
+  transition: color var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+#hero h1 {
+  color: #ffffff;
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.hero-tagline {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-button {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: #ffffff;
+  color: var(--color-primary);
+  border-radius: var(--radius);
+  font-weight: 700;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+/* =============================================
+   SCROLL INDICATOR
+   ============================================= */
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  transition: color var(--transition);
+}
+
+.scroll-indicator:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.scroll-arrow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* =============================================
+   ABOUT
+   ============================================= */
+#about {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg);
+}
+
+#about h2 {
+  margin-bottom: var(--spacing-lg);
+}
+
+#about p {
+  font-size: var(--font-size-lg);
+  max-width: 65ch;
+}
+
+/* =============================================
+   SKILLS
+   ============================================= */
+#skills {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-alt);
+}
+
+#skills h2 {
+  margin-bottom: var(--spacing-lg);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.skill-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-primary);
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* =============================================
+   CONTACT
+   ============================================= */
+#contact {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg);
+}
+
+#contact h2 {
+  margin-bottom: var(--spacing-md);
+}
+
+#contact-form {
+  max-width: 600px;
+  margin-top: var(--spacing-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-lg);
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+
+input,
+textarea {
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.submit-button:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.form-feedback {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  font-weight: 500;
+}
+
+.form-feedback.success {
+  background-color: #dcfce7;
+  color: var(--color-success);
+}
+
+.form-feedback.error {
+  background-color: #fee2e2;
+  color: var(--color-error);
+}
+
+.hidden {
+  display: none;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+#footer {
+  padding: var(--spacing-lg) 0;
+  background-color: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+#footer p {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin-bottom: 0;
+}
+
+/* =============================================
+   RESPONSIVE — TABLET (768px and below)
+   ============================================= */
+@media (max-width: 768px) {
+  h1 { font-size: var(--font-size-2xl); }
+  h2 { font-size: var(--font-size-xl); }
+
+  #navbar {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+
+  .nav-links {
+    gap: var(--spacing-md);
+  }
+}
+
+/* =============================================
+   RESPONSIVE — MOBILE (480px and below)
+   ============================================= */
+@media (max-width: 480px) {
+  h1 { font-size: var(--font-size-xl); }
+
+  .hero-tagline {
+    font-size: var(--font-size-base);
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+```
+
+---
+
+## Save and Check Your Work
+
+Save `style.css`, then refresh `index.html` in your browser. The page should now have
+a blue gradient hero, a readable layout, styled nav links, and skill tags that look
+like actual tags. If it still looks like a plain text document, double-check that the
+`<link rel="stylesheet" href="style.css">` tag in your HTML points to the right filename,
+and that `style.css` is saved in the same folder as `index.html`.
+
+If something looks off, open the browser DevTools (F12), click the **Elements** tab,
+hover over any element, and look at the **Styles** panel on the right. It shows exactly
+which CSS rules are applied, which are being overridden, and which expected rules are
+missing. It is the fastest way to stop guessing and start seeing what the browser
+actually thinks is happening.
+
+---
+
+## What You Learned
+
+- The box model explains why element sizes behave the way they do — `border-box` makes them behave the way you *expect*
+- CSS custom properties let you define colors, sizes, and spacing once and reuse them everywhere
+- `position: sticky` keeps the nav pinned at the top without the layout side effects of `position: fixed`
+- CSS Grid's `auto-fit` and `minmax()` handle responsive column layouts without a single media query
+- Removing `outline` on focus is only acceptable if you replace it with something equally visible
+- Media queries apply rules at specific viewport widths — put them last so they override the base styles above
+
+---
+
+## Next Steps
+
+Proceed to [Add JavaScript Interactivity](/tutorials/build/interactive/) — where the
+page stops being a pretty static document and starts actually responding to people.
+
+[^1]: [Baymard Institute — Readability: The Optimal Line Length](https://baymard.com/blog/line-length-readability) recommends 50–75 characters per line for body copy. The `ch` unit in CSS is the most reliable way to enforce this without converting to pixels.
+[^2]: [WCAG 2.1 Success Criterion 2.4.7 — Focus Visible](https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html) requires that keyboard focus indicators are always visible. Replacing `outline` with a custom `box-shadow` ring satisfies this requirement while allowing full visual control.

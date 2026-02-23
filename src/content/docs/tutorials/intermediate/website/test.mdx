@@ -1,33 +1,327 @@
 ---
-title: Testing Your First Website
-description: How to test your first website
+title: Test Your Website
+description: Validate the finished single-page site across browsers and screen sizes
 sidebar:
-  order: 6
+  order: 7
 ---
-## Testing
 
-Open the HTML page in a browser and see your beautiful work!
+import { Steps, Aside, LinkCard } from '@astrojs/starlight/components';
 
+## Introduction
 
-## Tutorial Summarization
+You just built something! Now make sure it actually works.
 
-### What You Learned
+Open a browser, open the index.html file, click around, resize the window, and 
+see what happens. The goal is to catch anything that looks broken or feels off 
+before you share the files or link with anyone else.
 
-- HTML document structure
-- CSS layout with Flexbox and Grid
-- Responsive design with media queries
-- Basic JavaScript interactivity
-- Form handling
+This step walks through a structured review so you do not miss anything obvious.
+Think of it less like a formal inspection and more like a quick walk-through of a
+room before guests arrive — just making sure nothing embarrassing is on the floor.
 
-### Next Steps
+---
 
-- Add more projects to your portfolio
-- Customize colors and fonts
-- Add images to project cards
-- Learn about hosting your site
+## See a Live Example
 
-### Continue learning with:
+Not sure what the finished page is supposed to look like? Here is a working demo
+built from exactly the same HTML, CSS, and JavaScript in this tutorial — placeholder
+content and all. Open it alongside your own file and compare section by section.
 
-- [Advanced CSS Techniques](/docs/tutorials/advanced-css/)
-- [JavaScript Fundamentals](/docs/tutorials/javascript-basics/)
-- [Deploying Your Website](/docs/guides/deploy-site/)
+<Aside type="tip" title="Live Demo">
+  See a finished version of this page at <a href="https://dev.kentknowsme.com/projects/simple-web-site/" target="_blank" rel="noopener noreferrer">dev.kentknowsme.com/projects/simple-web-site</a> — built from the same three files covered in this tutorial.
+</Aside>
+
+---
+
+## Open the Page
+
+<Steps>
+
+### Open index.html in your browser
+
+**From the CLI:**
+
+```bash
+open index.html        # macOS
+xdg-open index.html    # Linux
+start index.html       # Windows
+```
+
+**From the GUI:** Double-click `index.html` in Finder or File Explorer. Your default
+browser will open it.
+
+The URL in your address bar will look something like `file:///Users/yourname/projects/my-profile-site/index.html`.
+That `file://` prefix means the browser is reading directly from your disk rather than
+a web server — which is perfectly fine for everything built in this tutorial.
+
+### (Optional) Serve it over HTTP instead
+
+If you added any `fetch()` calls or ES module imports beyond what is in this tutorial,
+the browser's security policy will block them over `file://`. Run a local server instead:
+
+```bash
+python3 -m http.server 8080
+```
+
+Then open `http://localhost:8080` in your browser. Everything works the same way,
+just served the proper way.
+
+**Node.js (npx, also no install needed):**
+
+```bash
+npx serve .
+```
+
+Open `http://localhost:3000` in your browser.
+
+Both do the same job — pick whichever runtime you already have available.
+
+</Steps>
+
+---
+
+## Visual Checklist
+
+Work through the page top to bottom. For each item, if something looks off, the
+**Common Issues** section at the bottom has likely seen it before.
+
+### Navigation Bar
+
+- [ ] Nav bar is visible at the top of the page on first load
+- [ ] Logo text (your name) appears on the left
+- [ ] Nav links appear on the right and are horizontally aligned
+- [ ] Nav bar stays at the top of the screen when you scroll down
+- [ ] A subtle shadow appears under the nav once you scroll past the hero section
+
+### Hero Section
+
+- [ ] Hero fills the full height of the viewport on first load
+- [ ] Your name appears as the large heading
+- [ ] Tagline text is visible below the heading
+- [ ] "Get In Touch" button is visible and readable against the background gradient
+- [ ] Nothing is cut off or overflowing on a normal desktop window
+
+### About Section
+
+- [ ] Section heading is visible
+- [ ] Body text is readable and not stretched too wide on a large monitor
+- [ ] Background is a clean white (or your chosen color), distinct from the hero above it
+
+### Skills Section
+
+- [ ] Section heading is visible
+- [ ] Skill tags appear as individual pill-shaped cards in a grid layout
+- [ ] Grid has multiple columns (not a single vertical list)
+- [ ] Tags are evenly spaced
+
+### Contact Form
+
+- [ ] Section heading and intro paragraph are visible
+- [ ] Name, Email, and Message fields are displayed and labeled correctly
+- [ ] Fields are full-width and comfortably sized
+- [ ] Send Message button is visible below the fields
+
+### Footer
+
+- [ ] Footer is at the bottom of the page content
+- [ ] Copyright text is visible
+- [ ] Footer is visually distinct from the contact section above it (border or background difference)
+
+---
+
+## Responsive Checklist
+
+Drag the corner of your browser window and slowly make it narrower. Watch the layout
+respond as it crosses each breakpoint. You are looking for anything that breaks,
+overlaps, or becomes unreadable.
+
+<Aside type="tip">
+  A faster way to test multiple screen sizes is through browser DevTools. Press **F12**,
+  then click the device toolbar icon (it looks like a phone and tablet overlapping) near
+  the top of the DevTools panel. You can then pick from common device presets or type in
+  any width you want. Toggle it off when you are done and the browser goes back to normal.
+</Aside>
+
+### Tablet width (~768px)
+
+- [ ] Nav links stack below the logo instead of sitting side by side
+- [ ] Heading font sizes reduce to fit the smaller width
+- [ ] Hero content is still centered and readable
+- [ ] Skills grid has fewer columns than at full width
+- [ ] Form fields are still full-width
+
+### Mobile width (~480px)
+
+- [ ] All text is readable without zooming
+- [ ] No content is cut off or requires horizontal scrolling
+- [ ] Skill tags wrap cleanly into a compact two-column or three-column grid
+- [ ] The hero tagline text is smaller but still readable
+- [ ] The contact form and its button are easy to tap (nothing is too small or too close together)
+
+---
+
+## Functional Checklist
+
+Now test the JavaScript behaviors. Each one should work cleanly and without any
+visible hiccups.
+
+### Nav Scroll Shadow
+
+1. Load the page and look at the nav — no shadow visible at the top
+2. Scroll down a few pixels
+3. ✅ A soft shadow should appear under the nav bar
+4. Scroll back to the very top
+5. ✅ Shadow disappears again
+
+### Smooth Scroll Navigation
+
+1. Click each nav link one at a time
+2. ✅ The page should scroll smoothly to the correct section
+3. ✅ The section heading should land below the nav bar, not hidden behind it
+4. Try clicking the **Get In Touch** button in the hero
+5. ✅ Should scroll smoothly to the contact section
+
+### Contact Form — Empty Submission
+
+1. Leave all fields blank and click **Send Message**
+2. ✅ An error message should appear in red below the button
+3. ✅ The page should not reload
+
+### Contact Form — Invalid Email
+
+1. Type something in Name and Message, but put `notanemail` in the Email field
+2. Click **Send Message**
+3. ✅ An error message about the email address should appear
+
+### Contact Form — Successful Submission
+
+1. Fill in all three fields with valid values (use any real-looking email address)
+2. Click **Send Message**
+3. ✅ A green success message should appear
+4. ✅ All three fields should clear themselves automatically
+
+---
+
+## Cross-Browser Testing
+
+Your page should look and behave consistently across browsers. Test in at least two:
+
+<Aside type="note">
+  You do not need every browser installed. Chrome and Firefox together cover the vast
+  majority of what people use. Safari testing matters most if you expect visitors on
+  iPhones or Macs, since Safari is the only browser allowed on iOS devices — yes, even
+  Chrome on an iPhone is actually Safari underneath. It's a long story.[^1]
+</Aside>
+
+Open your `index.html` in each browser you have available and run through the visual
+and functional checklists again. You are mostly looking for anything that looks
+noticeably different — layout shifts, colors that do not match, hover states that do
+not fire. Small rendering differences between browsers are normal and usually not worth
+chasing. Anything that is completely broken is worth a fix.
+
+---
+
+## Common Issues and Fixes
+
+Things do not always work on the first try, and that is completely normal. Here are
+the most common problems and what to do about them:
+
+### CSS is not loading — page looks unstyled
+
+Check that the `<link>` tag in `index.html` matches your actual filename exactly:
+
+```html
+<link rel="stylesheet" href="style.css" />
+```
+
+Common culprits: a capital letter somewhere (`Style.css`), a typo (`styles.css`),
+or the file saved in the wrong folder. Both files need to be in the same directory.
+
+### JavaScript is not running
+
+Open DevTools (F12) and click the **Console** tab. Any JavaScript error will appear
+there in red with the filename and line number. Read it — the message is usually
+more helpful than it looks at first glance. Then check that your `<script>` tag
+at the bottom of `<body>` matches the actual filename:
+
+```html
+<script src="script.js" defer></script>
+```
+
+### A nav link does nothing when clicked
+
+The `href` on the link and the `id` on the target section do not match. They are
+case-sensitive — `href="#About"` and `id="about"` are two different things.
+Go back to `index.html` and compare them character by character.
+
+### The section heading lands behind the nav bar
+
+This means the smooth scroll offset is not accounting for the nav height correctly.
+Double-check the scroll behavior in `script.js` — the `navHeight` calculation uses
+`navbar.offsetHeight`, which only works if the `navbar` variable is pointing to the
+right element. A quick `console.log(navbar)` will confirm it.
+
+### The form reloads the page on submit
+
+`event.preventDefault()` is either missing or not being called. Check that the
+event listener is attached to the `<form>` element itself (with `id="contact-form"`),
+not to the submit button. The `submit` event fires on the form, not the button.
+
+### Skills tags are showing as a single vertical list
+
+The CSS grid is not applying. Check that the `<div class="skills-grid">` in `index.html`
+matches the `.skills-grid` selector in `style.css`, including the class name spelling.
+
+### Everything looks fine in Chrome but something is off in Safari
+
+Safari occasionally handles newer CSS features differently, especially around flexbox
+gap and certain gradient syntaxes. Open Safari's DevTools (`Develop > Show Web Inspector`),
+find the element in question, and check which CSS rules are being applied or ignored.
+[Can I Use](https://caniuse.com) is the go-to reference for checking which browsers
+support a specific CSS or JavaScript feature.
+
+---
+
+## You Are Done
+
+Seriously — nice work. You started with three empty files and ended up with a
+real, working, responsive single-page website built from scratch. That is not a small
+thing, even if it feels like it right now.
+
+Here is a quick recap of everything covered across this tutorial:
+
+- **HTML** gave the page structure and meaning — semantic elements, anchor links, form fields, and a layout the browser could understand
+- **CSS** gave it personality — a layout system, a color scheme, responsive breakpoints, and hover effects that make it feel intentional
+- **JavaScript** made it interactive — a live nav shadow, smooth scrolling, and form validation that gives users real feedback
+
+The three files talk to each other through class names and IDs. CSS reads the classes
+you write in HTML. JavaScript toggles those same classes based on what the user does.
+Keep that mental model and a lot of future web development will click into place
+more easily than you expect.
+
+---
+
+## What's Next
+
+The page works — now there are a few natural directions to take it:
+
+**Deploy it** so it has a real URL you can share. [GitHub Pages](https://pages.github.com),
+[Netlify](https://netlify.com), and [Cloudflare Pages](https://pages.cloudflare.com)
+are all free for personal projects and take less than ten minutes to set up.
+
+**Wire up the contact form** using [Formspree](https://formspree.io) or
+[Web3Forms](https://web3forms.com) so it actually sends email. No backend required.
+
+**Make it yours** — swap in your real name, bio, skills, and colors. The tutorial
+content is placeholder; the structure is yours to keep.
+
+**Keep learning** — the natural next steps from here are:
+
+- [Advanced CSS Techniques](/docs/tutorials/advanced-css/) — animations, custom scrollbars, dark mode
+- [WCAG Accessibility Fundamentals](/docs/tutorials/accessability/) — how to make your site more accessible
+- [JavaScript Fundamentals](/docs/tutorials/javascript-basics/) — a deeper look at the language itself
+- [Deploying Your Website](/docs/guides/deploy-site/) — a step-by-step guide to going live
+
+---
+
+[^1]: Apple requires all browsers distributed through the iOS App Store to use the WebKit rendering engine — the same engine that powers Safari. So Chrome, Firefox, and Edge on an iPhone are effectively Safari with a different coat of paint. This matters for testing because a bug that only appears in Safari on desktop will almost certainly also appear on every iPhone, regardless of which browser app the visitor is using. This requirement is spelled out in [section 2.5.6 of Apple's App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/#software-requirements).

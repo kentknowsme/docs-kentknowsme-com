@@ -1,6 +1,6 @@
 ---
 title: Build Your First Website
-description: A comprehensive tutorial on creating a simple responsive website using basic tools
+description: A step-by-step tutorial for building a simple responsive single-page website using HTML, CSS, and JavaScript
 lastUpdated: 2025-12-11
 sidebar:
   order: 1
@@ -10,51 +10,69 @@ import { Steps, LinkCard } from '@astrojs/starlight/components';
 
 ## Introduction
 
-Follow the steps below to learn how to build your first web page in minutes, requiring no coding skills
+Follow the steps below to build your first web page from scratch. No prior coding
+experience required — just a computer, a text editor, and a little patience.
+Each step builds on the last, so work through them in order.
+
+<Aside type="note" title="Intermediate Tutorial — How This Differs from the Basic Tutorial">
+  If you have already completed the [Build Your First Website](/tutorials/first-website/)
+  basic tutorial, welcome back. This intermediate version covers the same three-layer
+  approach (HTML, CSS, JavaScript) but goes deeper in several areas:
+
+  - **Navigation** — this tutorial uses `position: sticky` instead of `position: fixed`, which plays nicer with page layout
+  - **Semantic HTML** — this tutorial adds `<main>`, `<header>`, and proper `<label>` associations that the basic tutorial skips
+  - **CSS custom properties** — colors, spacing, and fonts are defined as variables so changes ripple through the whole stylesheet automatically
+  - **Form feedback** — instead of a browser `alert()` popup, this tutorial builds a proper inline success/error message using DOM manipulation
+  - **Scroll indicator** — a subtle animated chevron in the hero section cues visitors that more content is below the fold
+  - **Accessibility** — `aria-label`, focus rings, and semantic elements are covered throughout
+
+  The basic tutorial is a great single-page reference. This tutorial is a multi-step
+  walkthrough designed to explain the *why* behind each decision, not just the *what*.
+</Aside>
 
 ## Learning Path
 
 <Steps>
   <ol>
     <li>
-      <LinkCard 
+      <LinkCard
         title="Build a Knowledge of Website Basics"
-        description="Build a basic understanding of web page content, web page files, and web browsers"
+        description="Understand how web pages work, what files they use, and what tools you need before writing a single line of code"
         href="basics/"
       />
     </li>
     <li>
-      <LinkCard 
-        title="Prepare The Project Environment"
-        description="Create the files and folders for your first website"
+      <LinkCard
+        title="Prepare the Project Environment"
+        description="Create the project folder and the three starter files your site needs"
         href="setup/"
       />
     </li>
     <li>
-      <LinkCard 
+      <LinkCard
         title="Create HTML Structure"
-        description="Create the HTML file to set the web page structure and content"
+        description="Build the HTML5 document structure, semantic sections, navigation, and contact form"
         href="html/"
       />
     </li>
     <li>
-      <LinkCard 
+      <LinkCard
         title="Add CSS Styling"
-        description="Create the CSS file to set styling for all elements of the HTML page"
+        description="Write the stylesheet that gives the page its layout, color scheme, typography, and responsive design"
         href="styling/"
       />
     </li>
     <li>
-      <LinkCard 
-        title="Add JS Interactivity"
-        description="Create the JavaScript interactivity to several elements of the website"
+      <LinkCard
+        title="Add JavaScript Interactivity"
+        description="Add a scroll-aware nav shadow, smooth anchor scrolling, and client-side form validation"
         href="interactive/"
       />
     </li>
     <li>
-      <LinkCard 
+      <LinkCard
         title="Test Your Website"
-        description="Test the functionality of the website"
+        description="Walk through a visual and functional checklist to confirm everything works before you share it"
         href="testing/"
       />
     </li>
