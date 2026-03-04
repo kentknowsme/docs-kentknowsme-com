@@ -4,6 +4,8 @@ import starlight from '@astrojs/starlight';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -40,34 +42,17 @@ export default defineConfig({
               },
               {
                   label: 'Tutorials',
-                  items: [
-                      {
-                          label: 'Basic',
-                          autogenerate: { directory: 'tutorials/basic', collapsed: true },
-                      },
-                      {
-                          label: 'Intermediate',
-                          items: [
-                              {
-                                  label: 'Website Tutorial',
-                                  autogenerate: { directory: 'tutorials/intermediate/website', collapsed: true },
-
-                              },
-                          ],
-                      },
-                      {
-                          label: 'Advanced',
-                          autogenerate: { directory: 'tutorials/advanced', collapsed: true },
-                      },
-                  ],
+                  autogenerate: { directory: 'tutorials', collapsed: true },
               },
               { label: 'Services', link: '/services/' },
               { label: 'Portfolio', link: 'https://kentknowsme.com/' },
           ],
       }),
-	],
+    ],
 
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });

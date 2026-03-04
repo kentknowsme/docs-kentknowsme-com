@@ -9,11 +9,12 @@ import { Steps, Aside, LinkCard } from '@astrojs/starlight/components';
 
 ## Introduction
 
-You just built something! Now make sure it actually works.
+You built a thing. Now make sure it actually works.
 
-Open a browser, open the index.html file, click around, resize the window, and 
-see what happens. The goal is to catch anything that looks broken or feels off 
-before you share the files or link with anyone else.
+Testing a static website is about as low-stress as software testing gets — no servers
+to restart, no databases to seed, no deployment pipeline to untangle. Open a browser,
+click around, resize the window, and see what happens. The goal is to catch anything
+that looks broken or feels off before you share the link with anyone else.
 
 This step walks through a structured review so you do not miss anything obvious.
 Think of it less like a formal inspection and more like a quick walk-through of a
@@ -36,46 +37,52 @@ content and all. Open it alongside your own file and compare section by section.
 ## Open the Page
 
 <Steps>
+<ol>
+  <li>
+    ### Open index.html in your browser
 
-### Open index.html in your browser
+    **From the CLI:**
 
-**From the CLI:**
+    ```bash
+    open index.html        # macOS
+    xdg-open index.html    # Linux
+    start index.html       # Windows
+    ```
 
-```bash
-open index.html        # macOS
-xdg-open index.html    # Linux
-start index.html       # Windows
-```
+    **From the GUI:** Double-click `index.html` in Finder or File Explorer. Your
+    default browser will open it.
 
-**From the GUI:** Double-click `index.html` in Finder or File Explorer. Your default
-browser will open it.
+    The URL in your address bar will look something like
+    `file:///Users/yourname/projects/my-profile-site/index.html`. That `file://`
+    prefix means the browser is reading directly from your disk rather than a web
+    server — which is perfectly fine for everything built in this tutorial.
+  </li>
+  <li>
+    ### (Optional) Serve it over HTTP instead
 
-The URL in your address bar will look something like `file:///Users/yourname/projects/my-profile-site/index.html`.
-That `file://` prefix means the browser is reading directly from your disk rather than
-a web server — which is perfectly fine for everything built in this tutorial.
+    If you added any `fetch()` calls or ES module imports beyond what is in this
+    tutorial, the browser's security policy will block them over `file://`.
+    Run a local server instead:
 
-### (Optional) Serve it over HTTP instead
+    **Python 3 (built-in, no install needed):**
 
-If you added any `fetch()` calls or ES module imports beyond what is in this tutorial,
-the browser's security policy will block them over `file://`. Run a local server instead:
+    ```bash
+    python3 -m http.server 8080
+    ```
 
-```bash
-python3 -m http.server 8080
-```
+    Open `http://localhost:8080` in your browser.
 
-Then open `http://localhost:8080` in your browser. Everything works the same way,
-just served the proper way.
+    **Node.js (npx, also no install needed):**
 
-**Node.js (npx, also no install needed):**
+    ```bash
+    npx serve .
+    ```
 
-```bash
-npx serve .
-```
+    Open `http://localhost:3000` in your browser.
 
-Open `http://localhost:3000` in your browser.
-
-Both do the same job — pick whichever runtime you already have available.
-
+    Both do the same job — pick whichever runtime you already have available.
+  </li>
+</ol>
 </Steps>
 
 ---
@@ -210,7 +217,7 @@ Your page should look and behave consistently across browsers. Test in at least 
   You do not need every browser installed. Chrome and Firefox together cover the vast
   majority of what people use. Safari testing matters most if you expect visitors on
   iPhones or Macs, since Safari is the only browser allowed on iOS devices — yes, even
-  Chrome on an iPhone is actually Safari underneath. It's a long story.[^1]
+  Chrome on an iPhone is actually Safari underneath. It is a long story.[^1]
 </Aside>
 
 Open your `index.html` in each browser you have available and run through the visual
@@ -301,7 +308,7 @@ more easily than you expect.
 
 ---
 
-## What's Next
+## What is Next
 
 The page works — now there are a few natural directions to take it:
 
@@ -318,7 +325,6 @@ content is placeholder; the structure is yours to keep.
 **Keep learning** — the natural next steps from here are:
 
 - [Advanced CSS Techniques](/docs/tutorials/advanced-css/) — animations, custom scrollbars, dark mode
-- [WCAG Accessibility Fundamentals](/docs/tutorials/accessability/) — how to make your site more accessible
 - [JavaScript Fundamentals](/docs/tutorials/javascript-basics/) — a deeper look at the language itself
 - [Deploying Your Website](/docs/guides/deploy-site/) — a step-by-step guide to going live
 
